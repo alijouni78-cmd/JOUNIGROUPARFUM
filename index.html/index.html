@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@100;300;400;600;900&display=swap" rel="stylesheet">
     
     <style>
+        /* --- ESTILOS BASE --- */
         :root {
             --oak-dark: #0f0a07;
             --royal-beige: #d1b091;
@@ -18,84 +19,81 @@
         body { font-family: 'Montserrat', sans-serif; background-color: #000; color: var(--white-silk); overflow-x: hidden; }
         h1, h2, h3, .luxury-font { font-family: 'Cinzel', serif; }
 
-        /* --- OPTIMIZACIÓN MÓVIL DE FONDO --- */
+        /* --- BACKGROUND OPTIMIZADO --- */
         #bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; 
-            background-position: center center; /* Centrado perfecto en móvil */
-            background-repeat: no-repeat;
-            transition: background-image 1s ease-in-out;
+            background-position: center;
+            transition: background-image 0.8s ease-in-out;
             z-index: -2;
-            filter: brightness(0.35); /* Un poco más oscuro para leer mejor en móvil */
+            filter: brightness(0.35);
         }
-        
         .bg-gradient-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, #000 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, #000 100%);
             z-index: -1;
         }
 
+        /* --- UI COMPONENTS --- */
         .bg-glass { 
-            background: rgba(10, 10, 10, 0.85); /* Más opaco para legibilidad */
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(209, 176, 145, 0.2); 
-            border-radius: 8px;
+            background: rgba(15, 15, 15, 0.9); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 4px;
         }
         
-        /* BOTONES OPTIMIZADOS PARA DEDOS (TOUCH TARGETS) */
         .quiz-option { 
-            border: 1px solid rgba(255, 255, 255, 0.15); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
             background: rgba(0,0,0,0.6);
             transition: 0.3s all ease;
             font-weight: 700; text-transform: uppercase;
-            padding: 2rem 1.5rem; /* Más padding para tocar fácil */
-            min-height: 100px;
-            font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Texto legible */
+            padding: 1.5rem; 
+            min-height: 90px;
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
             letter-spacing: 1px;
             display: flex; align-items: center; justify-content: center;
-            text-align: center;
-            cursor: pointer;
+            text-align: center; cursor: pointer;
         }
         .quiz-option:hover, .quiz-option:active { 
-            background: var(--white-silk); 
-            color: #000; 
-            border-color: var(--bronze); 
+            background: var(--white-silk); color: #000; border-color: var(--bronze); 
         }
         
-        .progress-line { height: 4px; background: var(--bronze); position: fixed; top: 0; left: 0; transition: width 0.5s ease; z-index: 100; box-shadow: 0 0 10px var(--bronze); }
-        
-        .price-tag { border: 1px solid var(--bronze); color: var(--bronze); padding: 5px 15px; font-weight: 700; font-size: 14px; display: inline-block; margin-top: 10px;}
+        .progress-line { height: 3px; background: var(--bronze); position: fixed; top: 0; left: 0; transition: width 0.5s ease; z-index: 100; box-shadow: 0 0 15px var(--bronze); }
+        .price-tag { border: 1px solid var(--bronze); color: var(--bronze); padding: 5px 15px; font-weight: 700; font-size: 14px; display: inline-block; margin-top: 5px;}
 
-        /* CAJA DE MANIFIESTO MEJORADA */
+        /* --- RESULTADOS & MANIFIESTO --- */
         .manifesto-box { 
-            border-top: 2px solid var(--bronze); 
-            border-bottom: 2px solid var(--bronze); 
+            border-top: 1px solid var(--bronze); 
+            border-bottom: 1px solid var(--bronze); 
             padding: 40px 20px; 
-            background: rgba(0,0,0,0.9); 
-            width: 100%; max-width: 800px; margin-bottom: 60px; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(20,20,20,0.9)); 
+            width: 100%; max-width: 900px; margin-bottom: 50px; 
         }
-        .manifesto-content { 
-            font-size: clamp(1rem, 3vw, 1.3rem); 
-            line-height: 1.8; 
-            text-align: justify; 
-            color: #ddd; 
+        .manifesto-text { 
+            font-size: clamp(1rem, 2.5vw, 1.25rem); 
+            line-height: 1.8; text-align: justify; color: #ccc; font-weight: 300;
         }
-        .manifesto-content b { color: var(--royal-beige); }
+        .manifesto-text b { color: var(--royal-beige); font-weight: 600; }
 
-        .wa-btn { 
+        .action-btn { 
             background: var(--white-silk); color: #000 !important; 
             font-weight: 800; letter-spacing: 3px; 
-            transition: 0.3s all; width: 100%; max-width: 400px; 
-            padding: 20px; font-size: 14px; text-align: center; 
-            border-radius: 4px;
-            display: block;
+            transition: 0.3s all; padding: 18px 30px; font-size: 12px; 
+            text-align: center; border-radius: 2px; text-transform: uppercase;
+            display: inline-block; cursor: pointer;
         }
-        .wa-btn:hover { background: var(--bronze); transform: translateY(-3px); }
+        .action-btn:hover { background: var(--bronze); color: white !important; }
+        
+        .copy-link {
+            color: #777; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; 
+            margin-top: 15px; cursor: pointer; transition: 0.3s; text-decoration: underline;
+        }
+        .copy-link:hover { color: white; }
 
-        /* Arreglo para grid en móvil */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .options-grid-mobile { grid-template-columns: 1fr !important; }
-            .hero-title-mobile { font-size: 4rem !important; }
+            .options-grid-mobile { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .hero-title-mobile { font-size: 3.5rem !important; }
         }
     </style>
 </head>
@@ -108,14 +106,14 @@
 <!-- PANTALLA 1: HOME -->
 <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center p-6">
     <div class="animate__animated animate__fadeIn max-w-4xl">
-        <h2 class="text-xs md:text-sm uppercase text-zinc-400 mb-6 font-bold tracking-[0.5em]">Asunción • Paraguay</h2>
-        <h1 class="hero-title-mobile text-6xl md:text-9xl font-black mb-6 tracking-tighter uppercase leading-none text-white luxury-font">JOUNI GROUP</h1>
-        <div class="h-[1px] w-24 bg-zinc-700 mx-auto mb-10"></div>
-        <p class="text-zinc-300 font-light text-xl md:text-3xl mb-16 max-w-2xl mx-auto leading-relaxed">
-            El perfume no es solo un aroma.<br>Es la <span class="text-white font-bold underline decoration-orange-400">arquitectura de tu presencia</span>.
+        <h2 class="text-xs md:text-sm uppercase text-zinc-500 mb-6 font-bold tracking-[0.6em]">Asunción • Paraguay</h2>
+        <h1 class="hero-title-mobile text-6xl md:text-8xl font-black mb-8 tracking-tighter uppercase leading-none text-white luxury-font">JOUNI GROUP</h1>
+        <div class="h-[1px] w-20 bg-zinc-700 mx-auto mb-10"></div>
+        <p class="text-zinc-300 font-light text-lg md:text-2xl mb-16 max-w-xl mx-auto leading-relaxed">
+            Descubre la fragancia que narra tu historia sin decir una palabra.
         </p>
-        <button onclick="startQuiz()" class="bg-transparent border border-white hover:bg-white hover:text-black text-white px-10 py-6 text-sm md:text-lg tracking-[0.3em] font-bold transition-all uppercase w-full md:w-auto">
-            Decodificar mi ADN
+        <button onclick="startQuiz()" class="action-btn">
+            INICIAR DIAGNÓSTICO
         </button>
     </div>
 </section>
@@ -123,115 +121,310 @@
 <!-- PANTALLA 2: QUIZ -->
 <section id="quiz" class="hidden min-h-screen flex flex-col items-center justify-center p-6 relative">
     <div class="max-w-5xl w-full z-10">
-        <header class="text-center mb-16 md:mb-24">
-            <span id="step-indicator" class="text-xs tracking-[0.5em] text-zinc-500 font-bold mb-4 block uppercase">Fase 1 de 6</span>
-            <h2 id="q-title" class="text-3xl md:text-6xl font-medium text-white luxury-font uppercase leading-tight"></h2>
+        <header class="text-center mb-12 md:mb-20">
+            <span id="step-indicator" class="text-xs tracking-[0.4em] text-zinc-400 font-bold mb-3 block uppercase">Fase 1</span>
+            <h2 id="q-title" class="text-2xl md:text-5xl font-medium text-white luxury-font uppercase leading-tight"></h2>
         </header>
         
-        <!-- Grid de opciones: En móvil 1 col, en PC 3 cols -->
-        <div id="options-grid" class="options-grid-mobile grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8"></div>
+        <div id="options-grid" class="options-grid-mobile grid grid-cols-1 md:grid-cols-3 gap-6"></div>
     </div>
 </section>
 
 <!-- PANTALLA 3: CARGANDO -->
 <section id="loading" class="hidden min-h-screen flex flex-col items-center justify-center bg-black text-center z-50">
-    <div class="w-16 h-16 border-t-2 border-b-2 border-orange-400 rounded-full animate-spin mb-8"></div>
-    <h3 class="text-sm md:text-xl tracking-[0.5em] uppercase text-zinc-400 animate-pulse">Analizando Perfil...</h3>
+    <div class="w-12 h-12 border-t-2 border-b-2 border-orange-200 rounded-full animate-spin mb-6"></div>
+    <h3 class="text-xs md:text-sm tracking-[0.4em] uppercase text-zinc-500 animate-pulse">Procesando Algoritmo...</h3>
 </section>
 
 <!-- PANTALLA 4: RESULTADOS -->
 <section id="results" class="hidden min-h-screen py-20 px-4 flex flex-col items-center overflow-y-auto bg-black">
-    <div class="text-center mb-20 w-full max-w-5xl">
-        <h2 class="text-5xl md:text-8xl font-light mb-12 uppercase luxury-font text-white">Tu Selección</h2>
+    <div class="text-center mb-16 w-full max-w-6xl">
+        <h2 class="text-4xl md:text-7xl font-light mb-12 uppercase luxury-font text-white">Tu Manifiesto</h2>
         
+        <!-- CAJA DE DESCRIPCIÓN DINÁMICA -->
         <div class="manifesto-box mx-auto shadow-2xl animate__animated animate__fadeInUp">
-            <div id="final-manifesto" class="manifesto-content font-sans"></div>
+            <div id="final-manifesto" class="manifesto-text font-sans"></div>
+            <div onclick="copyResults()" class="copy-link">COPIAR RESULTADO COMPLETO</div>
         </div>
         
-        <!-- Botón de WhatsApp Principal -->
+        <!-- BOTÓN WHATSAPP -->
         <div id="whatsapp-btn-container" class="animate__animated animate__pulse animate__infinite animate__slow"></div>
     </div>
 
-    <!-- Contenedor de las 3 Tarjetas -->
-    <div id="cards-container" class="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full max-w-7xl mb-32"></div>
+    <!-- TARJETAS DE PERFUMES -->
+    <div id="cards-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-7xl mb-24"></div>
 
-    <!-- Footer Local -->
-    <div class="w-full max-w-4xl bg-zinc-900/50 p-10 md:p-20 text-center border border-zinc-800">
-        <h3 class="text-2xl md:text-4xl font-light mb-6 uppercase luxury-font text-orange-200">Experiencia Sensorial</h3>
-        <p class="text-zinc-500 mb-10 font-light">Para validar la alquimia con tu piel, visita nuestro showroom privado.</p>
-        <a href="https://maps.app.goo.gl/SPH8X9zguQxPuysq7" target="_blank" class="inline-block text-xs tracking-[0.2em] text-white border-b border-orange-400 pb-1 uppercase">📍 Galería Bonanza, Asunción</a>
+    <div class="text-center pb-20">
+        <p class="text-zinc-600 text-xs uppercase tracking-widest">Jouni Group © 2026</p>
     </div>
 </section>
 
 <script>
-    // CONFIGURACIÓN DE CONTACTO
+    // --- CONFIGURACIÓN ---
     const CONFIG = { WHATSAPP: '595987111111' };
 
-    // --- BASE DE DATOS OPTIMIZADA (6 EJEMPLOS PARA PRUEBA) ---
-    // Tags clave: 
-    // Género: masc, fem, uni
-    // Personalidad: extro (dulce/fiesta), intro (misterioso), lider (autoridad/trabajo), elegante (formal)
-    // Familia Olfativa: dulce, fresco, amaderado, especiado, floral
-    // Categoría: dia, noche, versatil
-    
+    // --- BASE DE DATOS COMPLETA JOUNI GROUP ---
     const perfumes = [
-        // 1. EL LIDER/OFICINA (MASC)
-        { 
-            name: "Lattafa Asad", 
-            price: "215.000", 
-            tags: ["masc", "noche", "lider", "amaderado", "especiado", "elegante", "beast"], 
-            salida: "Pimienta Negra, Tabaco", fondo: "Vainilla, Maderas", 
-            cat: "noche" 
-        },
-        // 2. EL ALMA DE LA FIESTA (UNI/DULCE)
-        { 
-            name: "Lattafa Khamrah", 
-            price: "340.000", 
-            tags: ["uni", "noche", "extro", "dulce", "gourmand", "beast", "fiesta"], 
-            salida: "Canela, Nuez Moscada", fondo: "Vainilla, Praliné", 
-            cat: "noche" 
-        },
-        // 3. EL VERSÁTIL/PROFESIONAL (MASC)
-        { 
-            name: "Armaf Club de Nuit Intense", 
-            price: "280.000", 
-            tags: ["masc", "versatil", "lider", "fresco", "citrico", "limpio", "beast"], 
-            salida: "Limón, Piña, Bergamota", fondo: "Almizcle, Abedul", 
-            cat: "versatil" 
-        },
-        // 4. LA ELEGANTE/FLORAL (FEM)
-        { 
-            name: "Lattafa Fakhar Rose", 
-            price: "290.000", 
-            tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "romantico"], 
-            salida: "Lirio, Frutas", fondo: "Nardo, Jazmín", 
-            cat: "versatil" 
-        },
-        // 5. LA DIVA/SEXY (FEM)
-        { 
-            name: "Lattafa Yara", 
-            price: "220.000", 
-            tags: ["fem", "dia", "extro", "dulce", "gourmand", "juvenil", "fiesta"], 
-            salida: "Orquídea, Heliotropo", fondo: "Vainilla, Frutas Tropicales", 
-            cat: "dia" 
-        },
-        // 6. EL FRESCO/RELAJADO (UNI)
-        { 
-            name: "Lattafa Maahir Legacy", 
-            price: "220.000", 
-            tags: ["masc", "uni", "dia", "intro", "fresco", "citrico", "limpio", "casual"], 
-            salida: "Lima, Menta", fondo: "Ambroxan, Vetiver", 
-            cat: "dia" 
-        }
+        { name: "Lattafa Afeef", price: "405.000", tags: ["masc", "dia", "extro", "fresco", "intense", "elegante", "limpio", "fresco"], salida: "Cítricos, Lima, Menta", fondo: "Pachulí, Cedro, Cuero", cat: "dia" },
+        { name: "Lattafa Al Dur Al Maknoon Silver", price: "180.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "fresco"], salida: "Piña, Bergamota, Manzana", fondo: "Musgo de Roble, Cuero", cat: "versatil" },
+        { name: "Lattafa Al Nashama", price: "260.000", tags: ["uni", "noche", "lider", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Bergamota, Pimienta Rosa", fondo: "Pachulí, Cuero", cat: "noche" },
+        { name: "Lattafa Al Nashama Caprice", price: "260.000", tags: ["masc", "prof", "extro", "fresco", "intense", "limpio", "lider", "dia"], salida: "Jengibre, Cardamomo", fondo: "Ámbar, Vetiver", cat: "versatil" },
+        { name: "Lattafa Al Noble Safeer", price: "225.000", tags: ["uni", "dia", "intro", "fresco", "suave", "elegante", "limpio", "dia"], salida: "Artemisia, Bergamota", fondo: "Enebro, Incienso", cat: "dia" },
+        { name: "Lattafa Al Noble Wazeer", price: "260.000", tags: ["uni", "noche", "extro", "dulce", "intense", "extro", "dulce", "noche"], salida: "Menta, Naranja", fondo: "Vainilla, Ámbar", cat: "noche" },
+        { name: "Lattafa Ana Abiyedh (Blanco)", price: "190.000", tags: ["uni", "dia", "intro", "dulce", "suave", "limpio", "limpio", "dia"], salida: "Almizcle Blanco", fondo: "Vainilla, Oud", cat: "dia" },
+        { name: "Lattafa Ana Abiyedh Leather", price: "195.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Limón, Cardamomo", fondo: "Cuero, Pachulí", cat: "noche" },
+        { name: "Lattafa Ana Abiyedh Rogue", price: "195.000", tags: ["uni", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Pera, Kumquat", fondo: "Ámbar Gris, Almizcle", cat: "versatil" },
+        { name: "Lattafa Art of Arabia I", price: "250.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "dia"], salida: "Menta, Té Negro", fondo: "Sándalo, Canela", cat: "dia" },
+        { name: "Lattafa Art of Arabia III", price: "260.000", tags: ["masc", "noche", "extro", "amaderado", "beast", "extro", "lider", "noche"], salida: "Davana, Bergamota", fondo: "Mirra, Pachulí", cat: "noche" },
+        { name: "Lattafa Art of Wood", price: "290.000", tags: ["masc", "noche", "intro", "amaderado", "suave", "elegante", "limpio", "dia"], salida: "Bergamota, Pera", fondo: "Madera de Cedro", cat: "noche" },
+        { name: "Lattafa Asad", price: "215.000", tags: ["masc", "noche", "extro", "amaderado", "beast", "extro", "dulce", "noche"], salida: "Piña, Pimienta Negra", fondo: "Vainilla, Ámbar", cat: "noche" },
+        { name: "Lattafa Asad Bourbon", price: "275.000", tags: ["masc", "noche", "lider", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Pimienta Negra, Cardamomo", fondo: "Musgo, Ámbar", cat: "noche" },
+        { name: "Lattafa Asad Zanzibar", price: "200.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "fresco"], salida: "Sal de Mar, Pimienta", fondo: "Vainilla, Iris", cat: "dia" },
+        { name: "Lattafa Bayaan", price: "220.000", tags: ["fem", "noche", "extro", "dulce", "intense", "elegante", "dulce", "noche"], salida: "Lichi, Canela", fondo: "Musgo, Vainilla", cat: "noche" },
+        { name: "Lattafa Breeze", price: "220.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Bergamota, Lavanda", fondo: "Sándalo, Cedro", cat: "dia" },
+        { name: "Lattafa Confidential Private Gold", price: "210.000", tags: ["uni", "dia", "extro", "fresco", "intense", "extro", "dulce", "fresco"], salida: "Melocotón, Maracuyá", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Lattafa Eclaire", price: "305.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Caramelo, Leche", fondo: "Vainilla, Miel", cat: "versatil" },
+        { name: "Lattafa Ejaazi", price: "220.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "dia"], salida: "Naranja, Lavanda", fondo: "Ambroxan, Cedro", cat: "versatil" }, 
+        { name: "Lattafa Ekhtiari", price: "210.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Mandarina, Bergamota", fondo: "Vainilla, Tonka", cat: "dia" },
+        { name: "Lattafa Emaaan", price: "230.000", tags: ["fem", "prof", "extro", "floral", "intense", "elegante", "limpio", "dia"], salida: "Azahar, Bergamota", fondo: "Sándalo, Almizcle", cat: "versatil" },
+        { name: "Lattafa Embrace", price: "195.000", tags: ["uni", "noche", "lider", "amaderado", "beast", "extro", "lider", "noche"], salida: "Jengibre, Cardamomo", fondo: "Ámbar, Pachulí", cat: "noche" },
+        { name: "Lattafa Fakhar Black", price: "290.000", tags: ["masc", "prof", "extro", "fresco", "intense", "limpio", "limpio", "dia"], salida: "Manzana, Jengibre", fondo: "Tonka, Cedro", cat: "dia" },
+        { name: "Lattafa Fakhar Extrait (Gold)", price: "290.000", tags: ["uni", "noche", "extro", "oriental", "beast", "extro", "dulce", "noche"], salida: "Toronja, Cardamomo", fondo: "Cachemira, Cuero", cat: "noche" },
+        { name: "Lattafa Fakhar Rose", price: "290.000", tags: ["fem", "dia", "intro", "floral", "suave", "elegante", "limpio", "dia"], salida: "Frutas, Lirio", fondo: "Vainilla, Almizcle Blanco", cat: "versatil" },
+        { name: "Lattafa Haya", price: "225.000", tags: ["fem", "dia", "extro", "dulce", "intense", "extro", "dulce", "fresco"], salida: "Champán Rosa, Fresa", fondo: "Ámbar, Castaña", cat: "dia" },
+        { name: "Lattafa Hayaati Al Maleky", price: "185.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Ruibarbo, Jengibre", fondo: "Ámbar, Cedro", cat: "versatil" },
+        { name: "Lattafa Hayaati (Negro)", price: "220.000", tags: ["masc", "dia", "extro", "fresco", "intense", "fresco", "limpio", "dia"], salida: "Manzana, Bergamota", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Lattafa Hayati Florence", price: "195.000", tags: ["fem", "dia", "extro", "floral", "intense", "extro", "dulce", "fresco"], salida: "Pomelo, Cítricos", fondo: "Almizcle, Ámbar", cat: "dia" },
+        { name: "Lattafa Hayati Gold Elixir", price: "190.000", tags: ["uni", "versatil", "intro", "oriental", "intense", "elegante", "dulce", "dia"], salida: "Lichi, Cactus", fondo: "Ambar, Almizcle", cat: "versatil" },
+        { name: "Lattafa Her Confession", price: "275.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Pera, Azafrán", fondo: "Vainilla, Caramelo", cat: "noche" },
+        { name: "Lattafa His Confession", price: "270.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "extro", "lider", "noche"], salida: "Mandarina, Canela", fondo: "Pachulí, Ámbar", cat: "noche" },
+        { name: "Lattafa Honor & Glory", price: "250.000", tags: ["uni", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Piña, Creme Brulee", fondo: "Sándalo, Vainilla", cat: "versatil" },
+        { name: "Lattafa Jasoor", price: "260.000", tags: ["masc", "noche", "extro", "amaderado", "intense", "extro", "lider", "noche"], salida: "Manzana, Bergamota", fondo: "Tonka, Cedro", cat: "noche" },
+        { name: "Lattafa Kashan", price: "255.000", tags: ["fem", "dia", "intro", "floral", "suave", "elegante", "limpio", "dia"], salida: "Manzana, Bergamota", fondo: "Vainilla, Ámbar", cat: "dia" },
+        { name: "Lattafa Khamrah", price: "340.000", tags: ["uni", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Canela, Nuez Moscada", fondo: "Vainilla, Tonka", cat: "noche" },
+        { name: "Lattafa Khamrah Qahwa", price: "340.000", tags: ["uni", "noche", "lider", "oriental", "beast", "extro", "dulce", "noche"], salida: "Jengibre, Canela", fondo: "Café, Vainilla", cat: "noche" },
+        { name: "Lattafa La African Drummer", price: "195.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "fresco"], salida: "Bergamota, Coco", fondo: "Vainilla, Sándalo", cat: "dia" },
+        { name: "Lattafa Lail Maleki", price: "195.000", tags: ["uni", "noche", "extro", "oriental", "beast", "extro", "dulce", "noche"], salida: "Notas Frutales, Especias", fondo: "Caramelo, Ámbar", cat: "noche" },  
+        { name: "Lattafa Lail Maleki Moroccan Blue", price: "190.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Manzana, Bergamota", fondo: "Musgo, Pachulí", cat: "dia" },
+        { name: "Lattafa Maahir (Dorado)", price: "205.000", tags: ["uni", "versatil", "extro", "fresco", "intense", "elegante", "extro", "dia"], salida: "Bayas Rojas, Melocotón", fondo: "Vainilla, Sándalo", cat: "versatil" },
+        { name: "Lattafa Maahir Black Edition", price: "210.000", tags: ["masc", "noche", "lider", "oriental", "beast", "extro", "lider", "noche"], salida: "Pimienta, Azafrán", fondo: "Cuero, Madera de Guayaco", cat: "noche" },
+        { name: "Lattafa Maahir Legacy", price: "220.000", tags: ["masc", "dia", "extro", "fresco", "intense", "limpio", "limpio", "fresco"], salida: "Lima, Menta, Enebro", fondo: "Ambroxan, Vetiver", cat: "dia" },
+        { name: "Lattafa Mayar", price: "220.000", tags: ["fem", "dia", "extro", "fresco", "intense", "elegante", "dulce", "dia"], salida: "Lichi, Frambuesa", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Lattafa Mayar Cherry Intense", price: "260.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Cereza, Frambuesa", fondo: "Caramelo, Pachulí", cat: "noche" },
+        { name: "Lattafa Mayar Natural Intense", price: "250.000", tags: ["fem", "versatil", "intro", "fresco", "suave", "limpio", "limpio", "fresco"], salida: "Bergamota, Melón", fondo: "Sándalo, Almizcle", cat: "versatil" },
+        { name: "Lattafa Mohra", price: "195.000", tags: ["uni", "noche", "lider", "oriental", "intense", "elegante", "lider", "noche"], salida: "Azafrán, Naranja", fondo: "Cedro, Pachulí", cat: "noche" },
+        { name: "Lattafa Muna", price: "160.000", tags: ["fem", "dia", "extro", "fresco", "intense", "elegante", "limpio", "dia"], salida: "Sandía, Fresa", fondo: "Almizcle, Notas Amaderadas", cat: "dia" },
+        { name: "Lattafa Musk Candy Rose", price: "210.000", tags: ["fem", "versatil", "intro", "dulce", "suave", "limpio", "dulce", "dia"], salida: "Cítricos, Rosa", fondo: "Vainilla, Sándalo", cat: "versatil" },
+        { name: "Lattafa Musk Salama", price: "210.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Almizcle Blanco", fondo: "Oud, Cuero suave", cat: "dia" },
+        { name: "Lattafa Musk Sugar Plum", price: "210.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Ciruela, Azúcar", fondo: "Almizcle, Vainilla", cat: "versatil" },
+        { name: "Lattafa Musk So Poudree", price: "210.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Notas Atalcadas", fondo: "Almizcle, Vainilla", cat: "dia" },
+        { name: "Lattafa Musk Wild Vanille", price: "210.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Té Verde, Cítricos", fondo: "Vainilla, Almizcle", cat: "versatil" },
+        { name: "Lattafa Musamam White Intense", price: "290.000", tags: ["uni", "versatil", "extro", "fresco", "intense", "elegante", "extro", "dia"], salida: "Naranja, Especias", fondo: "Sándalo, Coco", cat: "versatil" },
+        { name: "Lattafa Noble Blush", price: "275.000", tags: ["fem", "dia", "intro", "dulce", "suave", "limpio", "dulce", "dia"], salida: "Pera, Rosa", fondo: "Vainilla, Malvavisco", cat: "dia" },
+        { name: "Lattafa Oud for Mood", price: "160.000", tags: ["uni", "noche", "lider", "oriental", "beast", "extro", "lider", "noche"], salida: "Azafrán, Especias", fondo: "Pachulí, Oud", cat: "noche" },
+        { name: "Lattafa Oud for Glory", price: "200.000", tags: ["masc", "noche", "lider", "oriental", "beast", "elegante", "lider", "noche"], salida: "Nuez Moscada, Azafrán", fondo: "Oud, Pachulí", cat: "noche" },
+        { name: "Lattafa Oud Lail Maleki", price: "190.000", tags: ["uni", "noche", "extro", "oriental", "beast", "extro", "lider", "noche"], salida: "Cítricos, Notas Florales", fondo: "Oud, Caramelo", cat: "noche" },
+        { name: "Lattafa Pride Al Ameed", price: "250.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "dia"], salida: "Piña, Mandarina", fondo: "Cuero, Pachulí", cat: "versatil" },  { name: "Lattafa Pride Al Qiam Gold", price: "235.000", tags: ["uni", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Azafrán, Frambuesa", fondo: "Oud, Guayaco", cat: "noche" },
+        { name: "Lattafa Pride Ansaam Silver", price: "275.000", tags: ["masc", "noche", "extro", "oriental", "intense", "elegante", "dulce", "noche"], salida: "Cardamomo, Bergamota", fondo: "Vainilla, Ámbar", cat: "versatil" },
+        { name: "Lattafa Pride Ansaam Gold", price: "240.000", tags: ["fem", "dia", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Pera, Mandarina", fondo: "Frambuesa, Vainilla", cat: "versatil" },
+        { name: "Lattafa Pride Hala", price: "220.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Nuez Moscada, Pimienta", fondo: "Incienso, Ládano", cat: "noche" },
+        { name: "Lattafa Pride Ishq Al Shuyukh Gold", price: "285.000", tags: ["uni", "noche", "lider", "dulce", "beast", "extro", "dulce", "noche"], salida: "Azafrán, Caramelo", fondo: "Vainilla, Tonka", cat: "noche" },
+        { name: "Lattafa Pride Ishq Al Shuyukh Silver", price: "235.000", tags: ["uni", "dia", "extro", "fresco", "intense", "extro", "lider", "dia"], salida: "Limón, Bergamota", fondo: "Vainilla, Cedro", cat: "versatil" },
+        { name: "Lattafa Pride Antiquity 1505", price: "250.000", tags: ["uni", "noche", "intro", "oriental", "suave", "elegante", "lider", "noche"], salida: "Cereza Negra, Azafrán", fondo: "Aceite de Cipriol", cat: "noche" },
+        { name: "Lattafa Pride Leen", price: "230.000", tags: ["fem", "dia", "extro", "fresco", "intense", "extro", "dulce", "fresco"], salida: "Mango, Cúrcuma", fondo: "Sándalo, Almizcle", cat: "dia" },
+        { name: "Lattafa Pride Maharjan Silver", price: "220.000", tags: ["masc", "prof", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Bergamota, Mandarina", fondo: "Abedul, Vetiver", cat: "dia" },
+        { name: "Lattafa Pride Nebras", price: "230.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Bayas Rojas, Mandarina", fondo: "Cacao, Vainilla", cat: "noche" },
+        { name: "Lattafa Pride Peace & Love", price: "290.000", tags: ["fem", "dia", "intro", "floral", "suave", "elegante", "limpio", "dia"], salida: "Almendra, Bergamota", fondo: "Vainilla, Heliotropo", cat: "dia" },
+        { name: "Lattafa Pride Raw Human", price: "175.000", tags: ["uni", "noche", "intro", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Albaricoque, Ciruela", fondo: "Cuero, Olíbano", cat: "noche" },
+        { name: "Lattafa Pride Shaheen Gold", price: "230.000", tags: ["uni", "versatil", "extro", "fresco", "intense", "elegante", "lider", "dia"], salida: "Piña, Pomelo", fondo: "Pachulí, Haba Tonka", cat: "versatil" },
+        { name: "Lattafa Pride Shaheen Silver", price: "230.000", tags: ["masc", "prof", "lider", "fresco", "beast", "elegante", "lider", "dia"], salida: "Cassis, Bergamota", fondo: "Musgo de Roble, Ámbar", cat: "dia" },
+        { name: "Lattafa Pride Tharwah Gold", price: "250.000", tags: ["fem", "prof", "intro", "floral", "intense", "elegante", "limpio", "dia"], salida: "Lavanda, Bergamota", fondo: "Vainilla, Ámbar", cat: "versatil" },
+        { name: "Lattafa Pride Tharwah Silver", price: "250.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Menta, Bergamota", fondo: "Cedro, Almizcle", cat: "dia" },
+        { name: "Lattafa Pride Thouq", price: "220.000", tags: ["fem", "noche", "extro", "floral", "intense", "elegante", "lider", "noche"], salida: "Bergamota, Lichi", fondo: "Vetiver, Ámbar", cat: "noche" },
+        { name: "Lattafa Qaed Al Fursan", price: "195.000", tags: ["masc", "dia", "extro", "fresco", "beast", "extro", "lider", "fresco"], salida: "Piña, Azafrán", fondo: "Oud, Ámbar", cat: "dia" },
+        { name: "Lattafa Qaed Al Fursan Unlimited", price: "195.000", tags: ["uni", "dia", "intro", "fresco", "intense", "limpio", "limpio", "fresco"], salida: "Piña, Coco", fondo: "Sándalo, Almizcle", cat: "dia" },
+        { name: "Lattafa Qaa’ed (Dorado)", price: "195.000", tags: ["uni", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Canela, Cardamomo", fondo: "Vainilla, Oud", cat: "noche" },  { name: "Lattafa Qimmah for Men", price: "235.000", tags: ["masc", "prof", "intro", "amaderado", "intense", "elegante", "limpio", "dia"], salida: "Oud, Cedro", fondo: "Pachulí, Vetiver", cat: "dia" },
+        { name: "Lattafa Qimmah Woman", price: "225.000", tags: ["fem", "noche", "extro", "dulce", "beast", "exotica", "dulce", "noche"], salida: "Almendra, Café", fondo: "Cacao, Vainilla", cat: "noche" },
+        { name: "Lattafa Ra'ed Silver", price: "195.000", tags: ["masc", "dia", "extro", "fresco", "intense", "extro", "limpio", "fresco"], salida: "Mandarina, Cítricos", fondo: "Ámbar, Cuero", cat: "dia" },
+        { name: "Lattafa Ra'ed Oud", price: "195.000", tags: ["uni", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Azafrán, Mandarina", fondo: "Vainilla, Oud", cat: "noche" },
+        { name: "Lattafa Raghba", price: "180.000", tags: ["uni", "noche", "extro", "dulce", "intense", "exotica", "dulce", "noche"], salida: "Vainilla, Azúcar", fondo: "Ámbar, Incienso", cat: "noche" },
+        { name: "Lattafa Ramz Silver", price: "190.000", tags: ["masc", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Pera, Lavanda", fondo: "Vainilla, Ámbar", cat: "noche" },
+        { name: "Lattafa Sakeena", price: "210.000", tags: ["fem", "dia", "extro", "dulce", "beast", "exotica", "dulce", "dia"], salida: "Fruta de la Pasión", fondo: "Praliné, Vainilla", cat: "versatil" },
+        { name: "Lattafa Sehr", price: "250.000", tags: ["uni", "noche", "lider", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Almendra, Canela", fondo: "Vainilla, Ámbar", cat: "noche" },
+        { name: "Lattafa Ser Hubble", price: "175.000", tags: ["fem", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Ciclamen, Naranja", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Lattafa Sublime", price: "235.000", tags: ["fem", "dia", "extro", "fresco", "intense", "extro", "extro", "dia"], salida: "Manzana, Lichi", fondo: "Vainilla, Musgo", cat: "dia" },
+        { name: "Lattafa Teriaq", price: "290.000", tags: ["uni", "versatil", "lider", "amaderado", "beast", "exotica", "lider", "noche"], salida: "Caramelo, Pimienta", fondo: "Cuero, Vainilla", cat: "versatil" },
+        { name: "Lattafa Teriaq Intense", price: "315.000", tags: ["uni", "noche", "lider", "dulce", "beast", "elegante", "dulce", "noche"], salida: "Bergamota, Azafrán", fondo: "Ámbar, Tonka", cat: "noche" },
+        { name: "Lattafa The Kingdom Men", price: "290.000", tags: ["masc", "prof", "extro", "fresco", "intense", "limpio", "limpio", "dia"], salida: "Menta, Salvia", fondo: "Vainilla, Tonka", cat: "dia" },
+        { name: "Lattafa The Kingdom Woman", price: "260.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "elegante", "dulce", "dia"], salida: "Pera, Peonía", fondo: "Vainilla, Praliné", cat: "versatil" },
+        { name: "Lattafa Velvet Oud", price: "190.000", tags: ["uni", "noche", "lider", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Cardamomo, Bergamota", fondo: "Cuero, Oud", cat: "noche" },
+        { name: "Lattafa Velvet Rose", price: "195.000", tags: ["fem", "dia", "intro", "fresco", "suave", "elegante", "limpio", "dia"], salida: "Notas Dulces, Rosa", fondo: "Almizcle, Ámbar", cat: "dia" },
+        { name: "Lattafa 24 Carat Pure Gold", price: "180.000", tags: ["uni", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Oud, Azafrán", fondo: "Ámbar, Cuero", cat: "noche" },
+        { name: "Lattafa Torre Pisa", price: "360.000", tags: ["uni", "dia", "extro", "fresco", "intense", "limpio", "fresco", "fresco"], salida: "Mandarina, Limón", fondo: "Sándalo, Ámbar", cat: "dia" },
+        { name: "Lattafa Ramz Gold", price: "175.000", tags: ["uni", "versatil", "intro", "amaderado", "suave", "elegante", "limpio", "dia"], salida: "Manzana, Pera", fondo: "Sándalo, Ámbar", cat: "versatil" },
+        { name: "Lattafa Angham", price: "245.000", tags: ["fem", "versatil", "elegante", "dulce", "intense", "elegante", "dulce", "dia"], salida: "Jengibre, Mandarina", fondo: "Vainilla, Ámbar", cat: "versatil" }, { name: "Maison Alhambra Alpine Homme Sport", price: "215.000", tags: ["masc", "dia", "extro", "fresco", "intense", "extro", "limpio", "fresco"], salida: "Notas Marinas, Cítricos", fondo: "Vainilla, Haba Tonka", cat: "dia" },
+        { name: "Maison Alhambra Amberley Ombre Blue", price: "220.000", tags: ["uni", "noche", "intro", "amaderado", "suave", "elegante", "limpio", "noche"], salida: "Bergamota, Pimienta Rosa", fondo: "Ámbar, Pachulí", cat: "versatil" },
+        { name: "Maison Alhambra Archer Black", price: "190.000", tags: ["masc", "noche", "intro", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Cítricos, Especias", fondo: "Almizcle, Maderas", cat: "noche" },
+        { name: "Maison Alhambra Avant", price: "175.000", tags: ["masc", "prof", "lider", "fresco", "beast", "elegante", "lider", "dia"], salida: "Piña, Manzana", fondo: "Musgo, Ámbar Gris", cat: "dia" },
+        { name: "Maison Alhambra Bad Femme", price: "195.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Almendra, Café", fondo: "Cacao, Vainilla", cat: "noche" },
+        { name: "Maison Alhambra Bad Homme", price: "195.000", tags: ["masc", "noche", "extro", "amaderado", "intense", "extro", "lider", "noche"], salida: "Pimienta Blanca, Bergamota", fondo: "Cacao, Habat Tonka", cat: "noche" },
+        { name: "Maison Alhambra Camile", price: "195.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "limpio", "dia"], salida: "Peonía, Lichi", fondo: "Cedro, Ámbar", cat: "dia" },
+        { name: "Maison Alhambra Chants Tenderina", price: "180.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "limpio", "dia"], salida: "Membrillo, Pomelo", fondo: "Almizcle, Iris", cat: "dia" },
+        { name: "Maison Alhambra Coastal Pour Femme", price: "195.000", tags: ["fem", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Pimienta, Manzana", fondo: "Sándalo, Cedro", cat: "dia" },
+        { name: "Maison Alhambra Coral Blush", price: "190.000", tags: ["fem", "dia", "extro", "fresco", "intense", "extro", "limpio", "dia"], salida: "Frutos Rojos", fondo: "Almizcle, Ámbar", cat: "dia" },
+        { name: "Maison Alhambra Daring Blue", price: "190.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "dia"], salida: "Pomelo, Notas Acuáticas", fondo: "Incienso, Pachulí", cat: "versatil" },
+        { name: "Maison Alhambra Dark Aoud", price: "205.000", tags: ["uni", "noche", "intro", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Azafrán, Especias", fondo: "Sándalo, Oud", cat: "noche" },
+        { name: "Maison Alhambra Delilah", price: "235.000", tags: ["fem", "dia", "extro", "floral", "beast", "elegante", "dulce", "dia"], salida: "Ruibarbo, Lichi", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Maison Alhambra Eclat de Lune", price: "210.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "limpio", "dia"], salida: "Limón, Notas Verdes", fondo: "Almizcle, Maderas", cat: "dia" },
+        { name: "Maison Alhambra Encode", price: "195.000", tags: ["masc", "prof", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Bergamota, Pimienta Rosa", fondo: "Pachulí, Cuero", cat: "dia" },
+        { name: "Maison Alhambra Exclusif Oud", price: "195.000", tags: ["uni", "noche", "lider", "oriental", "beast", "elegante", "lider", "noche"], salida: "Azafrán, Comino", fondo: "Oud, Pachulí", cat: "noche" },
+        { name: "Maison Alhambra Exclusif Saffron", price: "175.000", tags: ["uni", "noche", "elegante", "oriental", "intense", "elegante", "lider", "noche"], salida: "Azafrán, Haba Tonka", fondo: "Guayacán, Enebro", cat: "noche" },
+        { name: "Maison Alhambra Exclusif Tabac", price: "195.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Jengibre, Osmanto", fondo: "Tabaco, Pachulí", cat: "noche" },
+        { name: "Maison Alhambra Flaming Elixir", price: "195.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Naranja Sanguínea, Jengibre", fondo: "Pachulí, Sándalo", cat: "noche" },
+        { name: "Maison Alhambra Galatea", price: "175.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Azafrán, Frutas", fondo: "Cuero, Gamuza", cat: "noche" },  { name: "Maison Alhambra Glacier Pour Homme", price: "205.000", tags: ["masc", "dia", "extro", "fresco", "intense", "fresco", "limpio", "fresco"], salida: "Menta, Lavanda, Bergamota", fondo: "Vainilla, Haba Tonka", cat: "dia" },
+        { name: "Maison Alhambra Glacier Bella", price: "195.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Pera, Bergamota", fondo: "Vainilla, Vetiver", cat: "noche" },
+        { name: "Maison Alhambra Glossy", price: "155.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "limpio", "dia"], salida: "Pera, Pimienta Rosa", fondo: "Vainilla, Pachulí", cat: "dia" },
+        { name: "Maison Alhambra Gusta", price: "210.000", tags: ["uni", "versatil", "lider", "fresco", "intense", "elegante", "lider", "dia"], salida: "Piña, Mandarina", fondo: "Sándalo, Abedul", cat: "versatil" },
+        { name: "Maison Alhambra Infini Elixir", price: "195.000", tags: ["uni", "noche", "lider", "oriental", "beast", "extro", "lider", "noche"], salida: "Canela, Nuez Moscada", fondo: "Cuero, Vainilla", cat: "noche" },
+        { name: "Maison Alhambra Infini Musk", price: "185.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Bergamota, Mandarina", fondo: "Almizcle Blanco, Sándalo", cat: "dia" },
+        { name: "Maison Alhambra Infini Rose", price: "190.000", tags: ["uni", "noche", "extro", "floral", "beast", "extro", "dulce", "noche"], salida: "Pimienta Rosa, Bergamota", fondo: "Ámbar, Vainilla", cat: "noche" },
+        { name: "Maison Alhambra Intrude EDP", price: "195.000", tags: ["fem", "versatil", "extro", "floral", "intense", "elegante", "dulce", "noche"], salida: "Bergamota, Pera", fondo: "Pachulí, Vainilla", cat: "versatil" },
+        { name: "Maison Alhambra Jean Lowe Immortal", price: "230.000", tags: ["masc", "prof", "lider", "fresco", "intense", "elegante", "lider", "dia"], salida: "Toronja, Jengibre", fondo: "Ambroxan, Ámbar", cat: "versatil" },
+        { name: "Maison Alhambra Jean Lowe Matière", price: "190.000", tags: ["fem", "noche", "intro", "oriental", "suave", "elegante", "intro", "noche"], salida: "Jazmín, Narciso", fondo: "Oud, Pachulí", cat: "noche" },
+        { name: "Maison Alhambra Jorge Di Profumo Deep Blue", price: "215.000", tags: ["masc", "dia", "extro", "fresco", "intense", "fresco", "limpio", "fresco"], salida: "Notas Marinas, Bergamota", fondo: "Mineral, Pachulí", cat: "dia" },
+        { name: "Maison Alhambra Karat", price: "230.000", tags: ["uni", "versatil", "extro", "fresco", "beast", "extro", "extro", "fresco"], salida: "Fruta de la Pasión, Melocotón", fondo: "Almizcle, Sándalo", cat: "versatil" },
+        { name: "Maison Alhambra Kismet For Woman", price: "200.000", tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "limpio", "dia"], salida: "Albaricoque, Rosa", fondo: "Ámbar, Cedro", cat: "dia" },
+        { name: "Maison Alhambra La Rogue Baroque Extreme", price: "190.000", tags: ["uni", "noche", "lider", "dulce", "beast", "extro", "dulce", "noche"], salida: "Almendra Amarga, Azafrán", fondo: "Ámbar Gris, Almizcle", cat: "noche" },
+        { name: "Maison Alhambra La Rogue Baroquee", price: "190.000", tags: ["uni", "versatil", "extro", "dulce", "beast", "extro", "dulce", "dia"], salida: "Jazmín, Azafrán", fondo: "Resina de Abeto, Cedro", cat: "versatil" },
+        { name: "Maison Alhambra La Vivacite", price: "205.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Grosella Negra, Pera", fondo: "Pachulí, Haba Tonka", cat: "versatil" },
+        { name: "Maison Alhambra La Vivacite Intense", price: "195.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Frambuesa, Pimienta Rosa", fondo: "Vainilla, Iris", cat: "noche" },
+        { name: "Maison Alhambra Lava", price: "195.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Menta Verde, Lavanda", fondo: "Estoraque, Musgo", cat: "dia" },
+        { name: "Maison Alhambra Leonie", price: "180.000", tags: ["fem", "prof", "lider", "floral", "intense", "elegante", "lider", "dia"], salida: "Lavanda, Mandarina", fondo: "Vainilla, Almizcle", cat: "versatil" },
+        { name: "Maison Alhambra L’ Oudh", price: "150.000", tags: ["uni", "noche", "lider", "oriental", "beast", "extro", "lider", "noche"], salida: "Ládano, Rosa", fondo: "Oud, Cedro", cat: "noche" },   { name: "Maison Alhambra Maitre De Blue", price: "180.000", tags: ["masc", "prof", "intro", "fresco", "intense", "elegante", "limpio", "dia"], salida: "Pomelo, Menta, Limón", fondo: "Incienso, Cedro, Sándalo", cat: "dia" },
+        { name: "Maison Alhambra Mia Dolcezza", price: "195.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "limpio", "dia"], salida: "Neroli, Flor de Papaya", fondo: "Almizcle, Cachemira", cat: "dia" },
+        { name: "Maison Alhambra Narissa For Her", price: "155.000", tags: ["fem", "dia", "intro", "floral", "suave", "elegante", "limpio", "dia"], salida: "Azahar, Bergamota", fondo: "Vetiver, Vainilla", cat: "versatil" },
+        { name: "Maison Alhambra Narissa Rouge", price: "155.000", tags: ["fem", "noche", "extro", "floral", "intense", "elegante", "dulce", "noche"], salida: "Iris, Rosa de Bulgaria", fondo: "Haba Tonka, Vainilla", cat: "noche" },
+        { name: "Maison Alhambra Olivia Blossom", price: "180.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Pimienta Rosa, Rosa", fondo: "Vainilla, Sal", cat: "dia" },
+        { name: "Maison Alhambra Perseus", price: "215.000", tags: ["masc", "noche", "lider", "oriental", "beast", "elegante", "lider", "noche"], salida: "Heliotropo, Bergamota", fondo: "Vainilla, Sándalo", cat: "noche" },
+        { name: "Maison Alhambra Philos Centro", price: "180.000", tags: ["uni", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Piña, Jacinto", fondo: "Almizcle, Ámbar", cat: "versatil" },
+        { name: "Maison Alhambra Philos Opus Noir", price: "180.000", tags: ["uni", "noche", "lider", "oriental", "beast", "elegante", "lider", "noche"], salida: "Frutos, Rosa Turca", fondo: "Pachulí, Vainilla", cat: "noche" },
+        { name: "Maison Alhambra Pink Shimmer Secret", price: "195.000", tags: ["fem", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Fruta de la Pasión, Piña", fondo: "Almizcle, Musgo", cat: "dia" },
+        { name: "Maison Alhambra Precious Gold", price: "175.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "elegante", "dulce", "dia"], salida: "Ruibarbo, Narciso", fondo: "Cachemira, Cedro", cat: "versatil" },
+        { name: "Maison Alhambra ROSE Seduction VIP", price: "195.000", tags: ["fem", "noche", "extro", "dulce", "intense", "extro", "dulce", "noche"], salida: "Champán, Frutas", fondo: "Notas Amaderadas, Ámbar", cat: "noche" },
+        { name: "Maison Alhambra Salvo EDP", price: "195.000", tags: ["masc", "prof", "extro", "fresco", "intense", "limpio", "lider", "dia"], salida: "Bergamota, Pimienta", fondo: "Ambroxan, Vainilla", cat: "dia" },
+        { name: "Maison Alhambra Salvo Elixir", price: "200.000", tags: ["masc", "noche", "lider", "oriental", "beast", "elegante", "lider", "noche"], salida: "Canela, Nuez Moscada", fondo: "Regaliz, Sándalo", cat: "noche" },
+        { name: "Maison Alhambra Salvo Intense", price: "200.000", tags: ["masc", "versatil", "extro", "oriental", "beast", "elegante", "lider", "noche"], salida: "Bergamota de Calabria", fondo: "Cedro, Ládano", cat: "versatil" },
+        { name: "Maison Alhambra Sceptre Amazonite", price: "200.000", tags: ["masc", "prof", "lider", "amaderado", "intense", "elegante", "lider", "dia"], salida: "Notas Verdes, Nuez Moscada", fondo: "Guayaco, Incienso", cat: "versatil" },
+        { name: "Maison Alhambra Sceptre Bronzite", price: "210.000", tags: ["masc", "dia", "lider", "fresco", "beast", "extro", "lider", "fresco"], salida: "Pomelo, Notas Amaderadas", fondo: "Ambroxan", cat: "dia" },
+        { name: "Maison Alhambra Sceptre Oceana", price: "190.000", tags: ["uni", "noche", "lider", "oriental", "beast", "elegante", "lider", "noche"], salida: "Bergamota, Pimienta Rosa", fondo: "Pachulí, Jazmín Sambac", cat: "noche" },
+        { name: "Maison Alhambra Sensual Vanilla", price: "195.000", tags: ["fem", "noche", "extro", "dulce", "intense", "elegante", "dulce", "noche"], salida: "Jazmín, Orquídea Vainilla", fondo: "Ámbar, Almizcle", cat: "versatil" },
+        { name: "Maison Alhambra Smoked Oud & Vanilla", price: "185.000", tags: ["uni", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Especias, Oud", fondo: "Vainilla de Madagascar", cat: "noche" },
+        { name: "Maison Alhambra Summer Forever", price: "210.000", tags: ["fem", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Ciruela, Naranja Sanguínea", fondo: "Pachulí, Vainilla", cat: "dia" },  { name: "Maison Alhambra The Myth", price: "155.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "intro", "dia"], salida: "Rosa de Bulgaria", fondo: "Almizcle Blanco", cat: "dia" },
+        { name: "Maison Alhambra The Trail", price: "150.000", tags: ["uni", "noche", "intro", "amaderado", "intense", "elegante", "intro", "noche"], salida: "Incienso, Aceite de Cade", fondo: "Ciprés, Notas Amaderas", cat: "noche" },
+        { name: "Maison Alhambra Toro Pour Homme", price: "180.000", tags: ["masc", "prof", "lider", "amaderado", "intense", "limpio", "lider", "dia"], salida: "Naranja, Pomelo", fondo: "Vetiver, Cedro, Benjuí", cat: "dia" },
+        { name: "Maison Alhambra Very Velvet Aqua", price: "175.000", tags: ["fem", "dia", "intro", "fresco", "suave", "limpio", "intro", "fresco"], salida: "Bergamota de Italia", fondo: "Cedro, Ámbar", cat: "dia" },
+        { name: "Maison Alhambra Victoria Flower", price: "155.000", tags: ["fem", "noche", "extro", "floral", "intense", "extro", "dulce", "noche"], salida: "Té, Bergamota, Orquídea", fondo: "Pachulí, Rosa, Jazmín", cat: "noche" },
+        { name: "Maison Alhambra Victorioso", price: "230.000", tags: ["masc", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Notas Marinas, Toronja", fondo: "Ámbar Gris, Guayaco", cat: "dia" },
+        { name: "Maison Alhambra Victorioso Nero", price: "205.000", tags: ["masc", "noche", "extro", "dulce", "beast", "extro", "lider", "noche"], salida: "Limón, Pimienta Rosa", fondo: "Haba Tonka, Vainilla", cat: "noche" },
+        { name: "Maison Alhambra Vogue Night", price: "195.000", tags: ["uni", "noche", "extro", "dulce", "intense", "extro", "dulce", "noche"], salida: "Mandarina, Notas Acuáticas", fondo: "Vainilla, Caramelo", cat: "noche" },
+        { name: "Maison Alhambra Vogue Party", price: "195.000", tags: ["uni", "versatil", "extro", "floral", "intense", "extro", "extro", "dia"], salida: "Almendra, Cereza", fondo: "Haba Tonka, Musgo", cat: "versatil" },
+        { name: "Maison Alhambra Vogue Rouge", price: "220.000", tags: ["fem", "versatil", "elegante", "floral", "intense", "limpio", "dulce", "dia"], salida: "Limón, Manzana", fondo: "Ámbar, Vainilla", cat: "versatil" },
+        { name: "Maison Alhambra YEAH! MAN (EDP)", price: "220.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "dia"], salida: "Manzana, Jengibre", fondo: "Amberwood, Haba Tonka", cat: "dia" },
+        { name: "Maison Alhambra YEAH! MAN Parfum", price: "195.000", tags: ["masc", "prof", "lider", "fresco", "beast", "limpio", "lider", "dia"], salida: "Aldehídos, Toronja", fondo: "Cedro, Pachulí", cat: "versatil" },
+        { name: "Maison Alhambra Your Touch Amber", price: "205.000", tags: ["uni", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Cardamomo, Pimienta Rosa", fondo: "Vainilla, Castaña", cat: "noche" },
+        { name: "Maison Alhambra Your Touch For Woman", price: "165.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "limpio", "dulce", "dia"], salida: "Frambuesa, Limón", fondo: "Vainilla, Almizcle", cat: "versatil" },
+        { name: "Maison Alhambra LA VOIE", price: "200.000", tags: ["fem", "dia", "elegante", "floral", "intense", "limpio", "dulce", "dia"], salida: "Flor de Azahar, Bergamota", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Maison Alhambra Victorioso Legacy", price: "210.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Limón de Sicilia, Pimienta", fondo: "Ámbar Rojo, Guayaco", cat: "noche" },
+        { name: "Maison Alhambra Victorioso Heroic", price: "210.000", tags: ["masc", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Violeta, Lavanda", fondo: "Sándalo, Cachemira", cat: "dia" },
+        { name: "Maison Alhambra Victorioso Fearless", price: "210.000", tags: ["masc", "versatil", "lider", "amaderado", "intense", "elegante", "lider", "dia"], salida: "Manzana, Clavo", fondo: "Vainilla, Ámbar", cat: "versatil" },
+        { name: "Al Wataniah Thahaani", price: "195.000", tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "intro", "dia"], salida: "Rosa, Melocotón, Aldehídos", fondo: "Sándalo, Almizcle, Pachulí", cat: "dia" },
+        { name: "Al Wataniah Sabah Al Ward", price: "180.000", tags: ["fem", "noche", "extro", "oriental", "intense", "extro", "dulce", "noche"], salida: "Pimienta Rosa, Mandarina", fondo: "Vainilla, Cacao, Pachulí", cat: "noche" },  { name: "Al Wataniah Shagaf Al Ward", price: "260.000", tags: ["fem", "noche", "intro", "dulce", "intense", "elegante", "dulce", "noche"], salida: "Rosa de Mayo, Jazmín", fondo: "Ámbar, Cedro", cat: "noche" },
+        { name: "Al Wataniah Kayaan Classic", price: "200.000", tags: ["masc", "noche", "intro", "amaderado", "beast", "limpio", "lider", "noche"], salida: "Naranja, Bergamota", fondo: "Vainilla, Pachulí", cat: "noche" },
+        { name: "Al Wataniah Kayaan Gold", price: "200.000", tags: ["masc", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Mandarina, Pera", fondo: "Ámbar, Cuero", cat: "noche" },
+        { name: "Al Wataniah Attar Al Wesal", price: "225.000", tags: ["masc", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Pera, Lavanda", fondo: "Ámbar, Pachulí", cat: "noche" },
+        { name: "Al Wataniah Khususi Duraat Al Aroos", price: "240.000", tags: ["uni", "dia", "intro", "dulce", "suave", "limpio", "limpio", "dia"], salida: "Almizcle Blanco", fondo: "Vainilla, Azafrán", cat: "dia" },
+        { name: "Al Wataniah Watani", price: "215.000", tags: ["uni", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Frutas Tropicales", fondo: "Almizcle, Ámbar", cat: "dia" },
+        { name: "Al Wataniah Ghala", price: "185.000", tags: ["uni", "noche", "lider", "oriental", "beast", "limpio", "lider", "noche"], salida: "Azafrán, Jazmín", fondo: "Resina de Abeto", cat: "noche" },
+        { name: "Al Wataniah Ameerati", price: "210.000", tags: ["fem", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Cítricos, Almizcle", fondo: "Notas Atalcadas", cat: "dia" },
+        { name: "Al Wataniah Special Oud", price: "225.000", tags: ["masc", "noche", "lider", "amaderado", "intense", "elegante", "lider", "noche"], salida: "Cuero, Azafrán", fondo: "Oud, Pachulí", cat: "noche" },
+        { name: "Al Wataniah Rose Mystery Intense", price: "195.000", tags: ["fem", "noche", "extro", "oriental", "beast", "extro", "extro", "noche"], salida: "Rosa Turca", fondo: "Vainilla, Incienso", cat: "noche" },
+        { name: "Asdaaf Andaleeb", price: "175.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Naranja, Bergamota", fondo: "Pachulí, Sándalo", cat: "noche" },
+        { name: "Asdaaf Andaleeb Flora", price: "175.000", tags: ["fem", "dia", "extro", "fresco", "intense", "limpio", "limpio", "dia"], salida: "Mandarina, Naranja", fondo: "Vainilla, Sándalo", cat: "dia" },
+        { name: "Asdaaf Ameerat Al Arab Prive Rose", price: "180.000", tags: ["fem", "dia", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Fresa, Uva", fondo: "Almizcle, Ámbar", cat: "versatil" },
+        { name: "Asdaaf Ameerat Al Arab (Clásico)", price: "180.000", tags: ["fem", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Cítricos, Aloe Vera", fondo: "Jazmín, Almizcle", cat: "dia" },
+        { name: "Asdaaf Ameer Al Arab Imperium", price: "215.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "dia"], salida: "Jengibre, Bergamota", fondo: "Ámbar, Sándalo", cat: "dia" },
+        { name: "Zimaya Fatima", price: "235.000", tags: ["fem", "versatil", "extro", "fresco", "beast", "elegante", "extro", "dia"], salida: "Ruibarbo, Bergamota", fondo: "Cachemira, Incienso", cat: "versatil" },
+        { name: "Zimaya Fatima Velvet Love", price: "235.000", tags: ["fem", "noche", "extro", "dulce", "intense", "extro", "dulce", "noche"], salida: "Fruta de la Pasión", fondo: "Sándalo, Caramelo", cat: "noche" },
+        { name: "Rave Now Woman (Rosa)", price: "205.000", tags: ["fem", "dia", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Frutas Rojas, Naranja", fondo: "Vainilla, Malvavisco", cat: "dia" },
+        { name: "Rave Now Rogue", price: "195.000", tags: ["uni", "versatil", "intro", "oriental", "suave", "limpio", "intro", "dia"], salida: "Notas Balsámicas", fondo: "Resinas, Sándalo", cat: "versatil" },
+        { name: "Rave Now EDP (Negro)", price: "220.000", tags: ["masc", "dia", "extro", "fresco", "beast", "extro", "lider", "fresco"], salida: "Piña, Bergamota", fondo: "Pachulí, Ámbar Gris", cat: "dia" }, // --- BLOQUE 11: AFNAN (Catálogo y Refuerzos) ---
+        { name: "Afnan 9AM (Amarillo)", price: "310.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Mandarina, Cardamomo", fondo: "Pachulí, Almizcle", cat: "dia" },
+        { name: "Afnan 9AM Pour Femme", price: "315.000", tags: ["fem", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Mandarina, Pomelo", fondo: "Almizcle, Ámbar", cat: "dia" },
+        { name: "Afnan 9PM Pour Femme", price: "290.000", tags: ["fem", "noche", "intro", "floral", "intense", "elegante", "noche", "noche"], salida: "Frambuesa, Manzana", fondo: "Pino, Ámbar", cat: "noche" },
+        { name: "Afnan 9AM Dive", price: "280.000", tags: ["masc", "versatil", "extro", "fresco", "intense", "limpio", "extro", "dia"], salida: "Menta, Limón", fondo: "Sándalo, Pachulí", cat: "versatil" },
+        { name: "Afnan 9PM (Negro)", price: "315.000", tags: ["masc", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Manzana, Canela", fondo: "Vainilla, Tonka", cat: "noche" },
+        { name: "Afnan Historic Olmeda", price: "295.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "lider", "fresco"], salida: "Pomelo, Jengibre", fondo: "Ámbar Gris, Pachulí", cat: "dia" },
+        { name: "Afnan Turathi Blue", price: "305.000", tags: ["masc", "prof", "lider", "fresco", "beast", "elegante", "lider", "dia"], salida: "Mandarina, Bergamota", fondo: "Ámbar, Pachulí", cat: "dia" },
+        { name: "Afnan Turathi Brown", price: "305.000", tags: ["masc", "noche", "intro", "amaderado", "intense", "elegante", "intro", "noche"], salida: "Notas Amaderadas", fondo: "Especias, Pachulí", cat: "noche" },
+        { name: "Afnan Rare Carbon", price: "310.000", tags: ["masc", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Cuero, Canela", fondo: "Sándalo, Vetiver", cat: "noche" },
+        { name: "Afnan Souvenir Desert Rose", price: "295.000", tags: ["fem", "versatil", "extro", "dulce", "beast", "extro", "dulce", "dia"], salida: "Notas Frutales", fondo: "Ámbar, Almizcle", cat: "versatil" },
+        { name: "Afnan Turathi Electric", price: "315.000", tags: ["masc", "dia", "extro", "fresco", "beast", "extro", "extro", "fresco"], salida: "Cítricos, Marino", fondo: "Ámbar Gris, Cedro", cat: "dia" },
+        { name: "Afnan Supremacy Gaia", price: "250.000", tags: ["masc", "versatil", "lider", "fresco", "beast", "extro", "limpio", "dia"], salida: "Bergamota, Especias", fondo: "Pachulí, Musgo", cat: "versatil" },
+        { name: "Afnan Supremacy Pink", price: "225.000", tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "limpio", "dia"], salida: "Pimienta Rosa", fondo: "Ámbar, Almizcle", cat: "dia" },
+        { name: "Afnan Supremacy Gold", price: "290.000", tags: ["uni", "noche", "elegante", "oriental", "intense", "intro", "noche", "noche"], salida: "Violeta, Comino", fondo: "Vainilla, Oud", cat: "noche" },
+        { name: "Afnan Supremacy Tapis Rouge", price: "250.000", tags: ["fem", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Cereza, Frambuesa", fondo: "Vainilla, Sándalo", cat: "noche" },
+        { name: "Afnan Rare Tiffany", price: "250.000", tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "limpio", "dia"], salida: "Mandarina, Jazmín", fondo: "Vainilla, Sándalo", cat: "dia" },
+        { name: "Afnan Rare Reef", price: "350.000", tags: ["masc", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Limón, Bergamota", fondo: "Ámbar, Almizcle", cat: "dia" },
+        { name: "Afnan 9PM Elixir", price: "335.000", tags: ["masc", "noche", "extro", "dulce", "beast", "extro", "dulce", "noche"], salida: "Regaliz, Manzana", fondo: "Ron, Vainilla", cat: "noche" },
+        { name: "Afnan 9PM Rebel", price: "280.000", tags: ["masc", "versatil", "extro", "dulce", "beast", "extro", "extro", "dia"], salida: "Mandarina, Manzana", fondo: "Caramelo, Vainilla", cat: "versatil" },
+        { name: "Afnan Historic Sahara", price: "350.000", tags: ["uni", "dia", "elegante", "oriental", "intense", "limpio", "intro", "dia"], salida: "Gengibre, Limón", fondo: "Sándalo, Ámbar", cat: "dia" },  { name: "Afnan Historic Doria", price: "270.000", tags: ["fem", "dia", "intro", "floral", "suave", "limpio", "limpio", "dia"], salida: "Azahar, Frambuesa", fondo: "Maderas Blancas, Almizcle", cat: "dia" },
+        { name: "Afnan Supremacy In Heaven", price: "250.000", tags: ["masc", "dia", "intro", "fresco", "intense", "limpio", "limpio", "fresco"], salida: "Bergamota, Mandarina", fondo: "Sándalo, Almizcle", cat: "dia" },
+        { name: "Afnan Supremacy Incense", price: "250.000", tags: ["masc", "noche", "lider", "oriental", "beast", "lider", "lider", "noche"], salida: "Orégano, Incienso", fondo: "Cuero, Oud, Pachulí", cat: "noche" },
+        { name: "Afnan Kianna Crush", price: "275.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Cítricos, Melocotón", fondo: "Vainilla, Almizcle", cat: "versatil" },
+        { name: "Afnan Tribute Pink", price: "245.000", tags: ["fem", "noche", "elegante", "floral", "intense", "extro", "dulce", "noche"], salida: "Pimienta Rosa, Mandarina", fondo: "Patchouli, Ámbar", cat: "noche" },
+        { name: "Armaf Odyssey Mandarin Sky", price: "350.000", tags: ["masc", "noche", "extro", "dulce", "intense", "extro", "dulce", "noche"], salida: "Mandarina, Azafrán", fondo: "Caramelo, Haba Tonka", cat: "noche" },
+        { name: "Armaf Club de Nuit Sillage", price: "340.000", tags: ["uni", "dia", "intro", "fresco", "intense", "limpio", "limpio", "fresco"], salida: "Bergamota, Grosella", fondo: "Almizcle, Ambroxan", cat: "dia" },
+        { name: "Armaf Club de Nuit Milestone", price: "325.000", tags: ["uni", "dia", "extro", "fresco", "intense", "elegante", "extro", "fresco"], salida: "Notas Marinas, Frutas", fondo: "Almizcle, Maderas", cat: "versatil" },
+        { name: "Armaf Club de Nuit Urban Man Elixir", price: "325.000", tags: ["masc", "versatil", "lider", "fresco", "beast", "extro", "lider", "dia"], salida: "Pimienta Rosa, Jazmín", fondo: "Ambroxan, Pachulí", cat: "versatil" },
+        { name: "Armaf Club de Nuit Intense Man", price: "280.000", tags: ["masc", "noche", "lider", "fresco", "beast", "extro", "lider", "noche"], salida: "Limón, Piña, Bergamota", fondo: "Ámbar Gris, Pachulí", cat: "noche" },
+        { name: "Armaf Club de Nuit Iconic", price: "325.000", tags: ["masc", "prof", "lider", "fresco", "intense", "limpio", "limpio", "dia"], salida: "Pomelo, Menta, Limón", fondo: "Incienso, Ámbar, Cedro", cat: "dia" },
+        { name: "Armaf Club de Nuit Oud", price: "470.000", tags: ["uni", "noche", "lider", "oriental", "beast", "lider", "lider", "noche"], salida: "Piña, Melocotón", fondo: "Oud, Pachulí, Sándalo", cat: "noche" },
+        { name: "Armaf Club de Nuit Woman", price: "250.000", tags: ["fem", "dia", "elegante", "floral", "intense", "limpio", "limpio", "dia"], salida: "Naranja, Pomelo", fondo: "Pachulí, Vainilla", cat: "dia" },
+        { name: "Armaf Miss Chic", price: "340.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Fresa, Frambuesa, Pera", fondo: "Pachulí, Almizcle Blanco", cat: "versatil" },
+        { name: "Armaf Blue Sky", price: "320.000", tags: ["masc", "dia", "intro", "fresco", "suave", "limpio", "limpio", "fresco"], salida: "Limón, Mandarina", fondo: "Ámbar, Pachulí", cat: "dia" },
+        { name: "Armaf Odyssey Homme Black", price: "320.000", tags: ["masc", "noche", "intro", "dulce", "intense", "elegante", "noche", "noche"], salida: "Vainilla, Ámbar", fondo: "Cuero, Iris", cat: "noche" },
+        { name: "Armaf Odyssey Homme White Edition", price: "320.000", tags: ["masc", "dia", "extro", "fresco", "intense", "limpio", "extro", "fresco"], salida: "Pimienta Rosa, Yuzu", fondo: "Guayacán, Ámbar", cat: "dia" },
+        { name: "Armaf Odyssey Aqua", price: "320.000", tags: ["masc", "dia", "extro", "fresco", "beast", "extro", "extro", "fresco"], salida: "Pomelo, Naranja", fondo: "Ambroxan, Pachulí", cat: "dia" },
+        { name: "Armaf Odyssey Limoni", price: "320.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "limpio", "fresco"], salida: "Limón, Mandarina", fondo: "Almizcle, Ámbar", cat: "dia" },
+        { name: "Armaf Odyssey Candee", price: "320.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Notas Frutales", fondo: "Vainilla, Caramelo", cat: "versatil" }, { name: "Al Haramain Amber Oud Gold 999.9", price: "410.000", tags: ["uni", "noche", "lider", "dulce", "beast", "elegante", "lider", "noche"], salida: "Pera, Bergamota", fondo: "Ámbar, Vainilla", cat: "noche" },
+        { name: "Al Haramain Amber Oud Ultra Violet", price: "470.000", tags: ["fem", "noche", "elegante", "floral", "intense", "elegante", "dulce", "noche"], salida: "Bergamota, Rosa", fondo: "Pachulí, Almizcle", cat: "noche" },
+        { name: "Al Haramain Amber Oud Bleu Edition", price: "360.000", tags: ["masc", "prof", "lider", "fresco", "beast", "limpio", "lider", "dia"], salida: "Pomelo, Limón, Menta", fondo: "Incienso, Sándalo", cat: "dia" },
+        { name: "Al Haramain Amber Oud Carbon", price: "380.000", tags: ["masc", "dia", "intro", "fresco", "intense", "limpio", "limpio", "dia"], salida: "Lavanda, Bergamota", fondo: "Ámbar, Cedro", cat: "versatil" },
+        { name: "Al Haramain Detour Noir", price: "285.000", tags: ["masc", "noche", "extro", "oriental", "beast", "elegante", "dulce", "noche"], salida: "Manzana, Lavanda", fondo: "Vainilla, Cardamomo", cat: "noche" },
+        { name: "Al Haramain Green Dubai", price: "290.000", tags: ["uni", "dia", "extro", "fresco", "beast", "extro", "extro", "fresco"], salida: "Mandarina, Bergamota", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "Al Haramain Palm Dubai", price: "290.000", tags: ["uni", "versatil", "intro", "fresco", "suave", "limpio", "limpio", "dia"], salida: "Lavanda, Manzana", fondo: "Pachulí, Vainilla", cat: "versatil" },
+        { name: "Bharara King", price: "485.000", tags: ["masc", "versatil", "extro", "dulce", "beast", "extro", "extro", "fresco"], salida: "Naranja, Bergamota", fondo: "Vainilla, Almizcle Blanco", cat: "versatil" },
+        { name: "Bharara Chocolate", price: "510.000", tags: ["uni", "noche", "intro", "dulce", "beast", "elegante", "dulce", "noche"], salida: "Cacao, Azúcar", fondo: "Vainilla, Ámbar", cat: "noche" },
+        { name: "Bharara Scarlet", price: "550.000", tags: ["fem", "noche", "extro", "dulce", "beast", "elegante", "dulce", "noche"], salida: "Frambuesa, Bergamota", fondo: "Ámbar, Sándalo", cat: "noche" },
+        { name: "French Avenue Liquid Brun", price: "270.000", tags: ["uni", "noche", "lider", "dulce", "beast", "elegante", "lider", "noche"], salida: "Canela, Azahar", fondo: "Vainilla Bourbon", cat: "noche" },
+        { name: "French Avenue Vulcan Feu", price: "350.000", tags: ["uni", "dia", "extro", "fresco", "beast", "extro", "extro", "fresco"], salida: "Mango, Limón, Jengibre", fondo: "Haba Tonka, Musgo", cat: "dia" },
+        { name: "French Avenue Veneno Scarlet", price: "380.000", tags: ["fem", "noche", "lider", "amaderado", "beast", "elegante", "lider", "noche"], salida: "Azafrán, Pimienta Rosa", fondo: "Cuero, Vainilla", cat: "noche" },
+        { name: "French Avenue Veneno Blanco", price: "440.000", tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "limpio", "dia"], salida: "Leche, Flor de Tiaré", fondo: "Vainilla, Almizcle", cat: "dia" },
+        { name: "French Avenue Ghost Spectre", price: "370.000", tags: ["uni", "noche", "intro", "oriental", "intense", "elegante", "intro", "noche"], salida: "Jengibre, Cardamomo", fondo: "Vainilla, Pachulí", cat: "noche" },
+        { name: "French Avenue Cancer (Zodiac)", price: "320.000", tags: ["uni", "dia", "intro", "limpio", "suave", "limpio", "limpio", "dia"], salida: "Mandarina, Lavanda", fondo: "Vainilla, Ámbar", cat: "dia" },
+        { name: "French Avenue Aries (Zodiac)", price: "325.000", tags: ["uni", "dia", "extro", "fresco", "intense", "extro", "extro", "fresco"], salida: "Bergamota, Mandarina", fondo: "Ámbar Gris", cat: "dia" },
+        { name: "French Avenue Pisces (Zodiac)", price: "320.000", tags: ["uni", "dia", "intro", "fresco", "suave", "limpio", "intro", "fresco"], salida: "Notas Marinas, Algas", fondo: "Musgo, Cedro", cat: "dia" },
+        { name: "Armaf Miss Chic", price: "340.000", tags: ["fem", "versatil", "extro", "dulce", "intense", "extro", "dulce", "dia"], salida: "Fresa, Frambuesa", fondo: "Pachulí, Vainilla", cat: "versatil" },
+        { name: "Armaf Club De Nuit Maleka", price: "300.000", tags: ["fem", "versatil", "elegante", "floral", "intense", "limpio", "intro", "dia"], salida: "Lichi, Bergamota", fondo: "Sándalo, Praliné", cat: "versatil" }
     ];
 
-    // --- PREGUNTAS PSICOGRÁFICAS (MEJORADAS) ---
+    // --- CUESTIONARIO Y MARCADORES DE IMAGEN ---
+    // IMPORTANTE: Reemplaza 'LINK_IMAGEN_AQUI' con tus URLs de Unsplash o carpeta local
     const quizData = [
         { 
             title: "¿CUÁL ES TU IDENTIDAD?", 
             key: 'gen', 
-            // Imagen: Abstracto neutro elegante
-            img: "https://images.unsplash.com/photo-1550503023-c9c0b2f6793c?q=80&w=1974&auto=format&fit=crop", 
+            img: "https://images.unsplash.com/photo-1675419426389-7567c5190a9b?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // SUGERENCIA: Algo abstracto/elegante
             options: [
                 { t: "Caballero", v: "masc" }, 
                 { t: "Dama", v: "fem" }, 
@@ -239,67 +432,63 @@
             ]
         },
         { 
-            title: "¿DÓNDE BRILLAS MÁS?", 
+            title: "¿DÓNDE TE SIENTES PODEROSO?", 
             key: 'env', 
-            // Imagen: Ciudad de noche o Oficina
-            img: "https://images.unsplash.com/photo-1485230905346-71acb9518d9c?q=80&w=2094&auto=format&fit=crop", 
+            img: "https://images.unsplash.com/photo-1652499543755-9dff40b5622e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // SUGERENCIA: Oficina moderna o Ciudad de noche
             options: [
-                { t: "Oficina / Negocios", v: "lider" }, // Prioriza elegante/amaderado
-                { t: "Fiesta / Vida Nocturna", v: "extro" }, // Prioriza dulce/beast
-                { t: "Uso Diario / Relax", v: "intro" } // Prioriza fresco/limpio
+                { t: "En los Negocios", v: "lider" }, 
+                { t: "En la Vida Nocturna", v: "extro" }, 
+                { t: "En la Calma Diaria", v: "intro" }
             ]
         },
         { 
-            title: "¿TU ROL EN UN GRUPO?", 
+            title: "¿CÓMO TE DESCRIBIRÍAN TUS AMIGOS?", 
             key: 'role', 
-            // Imagen: Grupo social
-            img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1932&auto=format&fit=crop", 
+            img: "https://plus.unsplash.com/premium_photo-1663099968626-0f834ac5b8ec?q=80&w=1206&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // SUGERENCIA: Grupo de personas o brindis
             options: [
-                { t: "El Centro de Atención", v: "fiesta" }, // Busca perfumes "Beast Mode"
-                { t: "El Líder Silencioso", v: "elegante" }, // Busca perfumes sofisticados
-                { t: "El Espíritu Libre", v: "casual" } // Busca perfumes versátiles
+                { t: "El Alma de la Fiesta", v: "fiesta" }, 
+                { t: "El Líder Serio", v: "elegante" }, 
+                { t: "El Espíritu Libre", v: "casual" }
             ]
         },
         { 
-            title: "¿TU OUTFIT FAVORITO?", 
+            title: "¿QUÉ ESTILO TE DEFINE?", 
             key: 'style', 
-            // Imagen: Moda
-            img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop", 
+            img: "https://images.unsplash.com/photo-1683223059099-e2f012c65630?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // SUGERENCIA: Ropa (Traje o Streetwear)
             options: [
-                { t: "Traje / Formal / Blazer", v: "amaderado" }, 
-                { t: "Trendy / Llamativo", v: "dulce" }, 
-                { t: "Minimalista / Sport", v: "fresco" }
+                { t: "Formal / Elegante", v: "amaderado" }, 
+                { t: "Atrevido / Sexy", v: "dulce" }, 
+                { t: "Fresco / Minimalista", v: "fresco" }
             ]
         },
         { 
-            title: "¿INTENSIDAD DESEADA?", 
+            title: "¿QUÉ HUELLA QUIERES DEJAR?", 
             key: 'power', 
-            // Imagen: Humo o estela
-            img: "https://images.unsplash.com/photo-1519638831568-d9897f54ed69?q=80&w=2070&auto=format&fit=crop", 
+            img: "https://img.freepik.com/premium-photo/silhouette-man-rays-shining-aura-around-his-body-against-backdrop-outer-space-with-stars-theme-awakening-energy-discovering-magical-abilities_386897-6671.jpg", // SUGERENCIA: Humo, Estela, Caminando
             options: [
-                { t: "Modo Bestia (Que inunde el lugar)", v: "beast" }, 
-                { t: "Burbuja Personal (Al saludar)", v: "suave" }, 
-                { t: "Equilibrada (Estela notable)", v: "limpio" }
+                { t: "Inolvidable (Modo Bestia)", v: "beast" }, 
+                { t: "Íntima (Cerca de piel)", v: "suave" }, 
+                { t: "Profesional (Equilibrada)", v: "limpio" }
             ]
         },
         { 
-            title: "¿QUÉ TE ATRAE MÁS?", 
+            title: "¿QUÉ NOTAS TE ATRAEN?", 
             key: 'note_pref', 
-            // Imagen: Especias
-            img: "https://images.unsplash.com/photo-1596436034336-6c07d3db427e?q=80&w=1974&auto=format&fit=crop", 
+            img: "https://images.unsplash.com/photo-1656248781640-a8ab77846950?q=80&w=1187&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // SUGERENCIA: Ingredientes (Especias, Vainilla o Cítricos)
             options: [
-                { t: "Maderas, Cuero y Especias", v: "especiado" }, 
-                { t: "Vainilla, Caramelo y Frutas", v: "gourmand" }, 
-                { t: "Cítricos, Mar y Limpieza", v: "citrico" }
+                { t: "Maderas y Especias", v: "especiado" }, 
+                { t: "Vainilla y Dulces", v: "gourmand" }, 
+                { t: "Cítricos y Marinas", v: "citrico" }
             ]
         }
     ];
 
     let step = 0;
-    let userAnswers = [];
+    let userAnswers = {}; // Ahora guardamos como objeto para acceder por clave
+    let userAnswersArray = []; // Para el filtrado de tags
 
-    // Iniciar con la imagen del home (usa la del primer paso como pre-carga)
-    document.getElementById('bg-layer').style.backgroundImage = `url('https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=1974&auto=format&fit=crop')`;
+    // Cargar imagen de Home
+    document.getElementById('bg-layer').style.backgroundImage = `url('https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=1974')`;
 
     function startQuiz() {
         document.getElementById('home').classList.add('hidden');
@@ -309,17 +498,20 @@
 
     function showStep() {
         const q = quizData[step];
-        
-        // Actualizar UI
-        document.getElementById('step-indicator').innerText = `FASE ${step + 1} DE ${quizData.length}`;
+        document.getElementById('step-indicator').innerText = `FASE ${step + 1} / ${quizData.length}`;
         document.getElementById('q-title').innerText = q.title;
-        document.getElementById('bg-layer').style.backgroundImage = `url('${q.img}')`;
         
-        // Barra de progreso
+        // Cargar imagen si existe, si no usar un color base
+        if(q.img && q.img !== "LINK_IMAGEN_FASE_" + (step+1)) {
+            document.getElementById('bg-layer').style.backgroundImage = `url('${q.img}')`;
+        } else {
+            // Placeholder visual si no has puesto link aun
+             document.getElementById('bg-layer').style.backgroundColor = "#111";
+        }
+        
         const progress = ((step) / quizData.length) * 100;
         document.getElementById('progress').style.width = `${progress}%`;
 
-        // Generar Opciones
         const grid = document.getElementById('options-grid'); 
         grid.innerHTML = '';
         
@@ -328,7 +520,8 @@
             btn.className = "quiz-option animate__animated animate__fadeInUp";
             btn.innerText = opt.t;
             btn.onclick = () => { 
-                userAnswers.push(opt.v); // Guardar tag
+                userAnswers[q.key] = opt.t; // Guardar texto para narrativa
+                userAnswersArray.push(opt.v); // Guardar valor para algoritmo
                 nextStep(); 
             };
             grid.appendChild(btn);
@@ -336,133 +529,127 @@
     }
 
     function nextStep() {
-        if (step < quizData.length - 1) {
-            step++;
-            showStep();
-        } else {
-            finishQuiz();
-        }
+        if (step < quizData.length - 1) { step++; showStep(); } 
+        else { finishQuiz(); }
     }
 
     function finishQuiz() {
         document.getElementById('quiz').classList.add('hidden');
         document.getElementById('loading').classList.remove('hidden');
         document.getElementById('progress').style.width = '100%';
-        
-        // Simular cálculo de algoritmo (2 segundos)
-        setTimeout(() => {
-            calculateResults();
-        }, 2000);
+        setTimeout(calculateResults, 2000);
     }
 
-    // --- ALGORITMO DE RECOMENDACIÓN MEJORADO ---
+    // --- GENERADOR DE NARRATIVA (PERSONALIDAD) ---
+    function generateNarrative() {
+        let text = "";
+        
+        // Introducción basada en Identidad y Entorno
+        if(userAnswers.env === "En los Negocios") {
+            text += `Tu perfil olfativo revela una personalidad orientada al <b>éxito y la autoridad</b>. `;
+        } else if (userAnswers.env === "En la Vida Nocturna") {
+            text += `Tu ADN olfativo proyecta un aura de <b>magnetismo y seducción</b>. `;
+        } else {
+            text += `Tu esencia se define por el <b>equilibrio y la autenticidad</b>. `;
+        }
+
+        // Cuerpo basado en Estilo y Rol
+        text += `Buscas una fragancia que complemente tu estilo <b>${userAnswers.style.toLowerCase()}</b> `;
+        if(userAnswers.role === "El Alma de la Fiesta") {
+            text += `y que te permita ser el centro de atención sin esfuerzo. `;
+        } else if (userAnswers.role === "El Líder Serio") {
+            text += `y comunique respeto y confianza a tu alrededor. `;
+        } else {
+            text += `y te acompañe en tu día a día con frescura y libertad. `;
+        }
+
+        // Conclusión basada en Preferencias
+        text += `Hemos decodificado tu preferencia por notas de <b>${userAnswers.note_pref.toLowerCase()}</b> para seleccionar esta tríada maestra.`;
+        
+        return text;
+    }
+
+    // --- ALGORITMO Y RENDERIZADO ---
     function calculateResults() {
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
-        
-        // Imagen de fondo final (oscura y elegante)
-        document.getElementById('bg-layer').style.backgroundImage = `url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop')`;
+        // Fondo final
+        document.getElementById('bg-layer').style.backgroundImage = `url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070')`;
 
-        // 1. FILTRADO DURO POR GÉNERO (Masc, Fem, Uni)
-        // Si el usuario elige "Uni", le mostramos todo. Si elige Masc, mostramos Masc + Uni.
-        let gender = userAnswers[0];
+        // 1. Filtrado y Puntuación
+        let genderTag = userAnswersArray[0];
         let candidates = perfumes.filter(p => {
-            if (gender === 'uni') return true; 
-            return p.tags.includes(gender) || p.tags.includes('uni');
+            if (genderTag === 'uni') return true; 
+            return p.tags.includes(genderTag) || p.tags.includes('uni');
         });
 
-        // 2. SISTEMA DE PUNTUACIÓN (SCORING)
-        // Comparamos los tags elegidos (userAnswers) con los tags del perfume
         candidates = candidates.map(p => {
             let score = 0;
-            userAnswers.forEach(tag => {
-                if (p.tags.includes(tag)) score += 10; // Coincidencia exacta
-            });
+            // Puntos por coincidencia de tags
+            userAnswersArray.forEach(tag => { if (p.tags.includes(tag)) score += 10; });
             return { ...p, score: score };
         });
-
-        // 3. SELECCIÓN DE CATEGORÍAS (Día, Noche, Versátil)
-        // Ordenamos por puntuación para encontrar los mejores candidatos
         candidates.sort((a, b) => b.score - a.score);
 
-        // Función para buscar el mejor de una categoría específica que no se repita
-        const getBestInCat = (catName, excludeList = []) => {
-            return candidates.find(p => 
-                (p.cat === catName || p.tags.includes(catName)) && 
-                !excludeList.includes(p.name)
-            ) || candidates[0]; // Fallback al mejor puntuado general
-        };
-
-        const dailyPick = getBestInCat('dia');
-        const nightPick = getBestInCat('noche', [dailyPick.name]);
-        const versatilPick = getBestInCat('versatil', [dailyPick.name, nightPick.name]);
-
-        // 4. GENERAR TEXTO DE MANIFIESTO
-        // Personalizar el texto basado en la respuesta de "Rol" (índice 2) y "Estilo" (índice 3)
-        const personalityMap = {
-            'fiesta': 'AUDACIA MAGNÉTICA',
-            'elegante': 'AUTORIDAD SILENCIOSA',
-            'casual': 'ESPÍRITU LIBRE',
-            'lider': 'LIDERAZGO NATO',
-            'extro': 'PRESENCIA IMPONENTE',
-            'intro': 'ELEGANCIA DISCRETA'
-        };
+        // 2. Selección de los 3 Perfumes
+        const getBest = (cat, exclude=[]) => candidates.find(p => (p.cat===cat || p.tags.includes(cat)) && !exclude.includes(p.name)) || candidates[0];
         
-        // Buscamos alguna coincidencia en el mapa de personalidad
-        let archetype = "SOFISTICACIÓN PURA"; // Default
-        userAnswers.forEach(ans => {
-            if(personalityMap[ans]) archetype = personalityMap[ans];
-        });
+        const pickDay = getBest('dia');
+        const pickNight = getBest('noche', [pickDay.name]);
+        const pickVersatil = getBest('versatil', [pickDay.name, pickNight.name]);
 
-        const manifestoHTML = `
-            Diagnóstico finalizado. Tu perfil olfativo proyecta <b>${archetype}</b>.<br><br>
-            Hemos curado una tríada para tu estilo de vida: 
-            Una firma para el <b>Día</b> que aporta energía, 
-            un arma secreta para la <b>Noche</b> que seduce, 
-            y un comodín <b>Versátil</b> que se adapta a cualquier terreno.
-        `;
-        document.getElementById('final-manifesto').innerHTML = manifestoHTML;
+        // 3. Renderizar Manifiesto
+        document.getElementById('final-manifesto').innerHTML = generateNarrative();
 
-        // 5. BOTÓN DE WHATSAPP CON PEDIDO
-        const waText = `Hola JOUNI GROUP. Hice el test de ADN. Este es mi resultado:%0A` +
-                       `☀️ DÍA: ${dailyPick.name}%0A` +
-                       `🌙 NOCHE: ${nightPick.name}%0A` +
-                       `💎 VERSÁTIL: ${versatilPick.name}`;
-                       
-        document.getElementById('whatsapp-btn-container').innerHTML = `
-            <a href="https://wa.me/${CONFIG.WHATSAPP}?text=${waText}" target="_blank" class="wa-btn mx-auto">
-                SOLICITAR MI COLECCIÓN COMPLETA
-            </a>
-        `;
-
-        // 6. RENDERIZAR TARJETAS
+        // 4. Renderizar Tarjetas con "Razón de selección"
         const container = document.getElementById('cards-container');
         container.innerHTML = '';
-        
+
         const selection = [
-            { role: "ENERGÍA DIURNA", data: dailyPick },
-            { role: "DOMINIO NOCTURNO", data: nightPick },
-            { role: "FIRMA VERSÁTIL", data: versatilPick }
+            { role: "PARA TU DÍA A DÍA", p: pickDay },
+            { role: "PARA LA NOCHE", p: pickNight },
+            { role: "TU COMODÍN", p: pickVersatil }
         ];
 
+        let resultTextForCopy = `*MI ADN OLFATIVO - JOUNI GROUP*%0A%0A${document.getElementById('final-manifesto').innerText}%0A%0A`;
+
         selection.forEach(item => {
+            // Crear explicación dinámica de por qué se eligió
+            let matchTags = item.p.tags.filter(t => userAnswersArray.includes(t)).join(", ");
+            if(!matchTags) matchTags = "tu estilo único";
+            
+            resultTextForCopy += `*${item.role}:* ${item.p.name}%0A`;
+
             container.innerHTML += `
-                <div class="bg-glass p-8 md:p-12 flex flex-col items-center text-center shadow-lg transform transition hover:scale-105 duration-500 animate__animated animate__fadeInUp">
-                    <div class="text-[10px] tracking-[0.4em] text-orange-300 font-bold mb-6 border-b border-white/10 pb-4 uppercase w-full">
-                        ${item.role}
+                <div class="bg-glass p-8 flex flex-col items-center text-center shadow-lg animate__animated animate__fadeInUp">
+                    <div class="text-[10px] tracking-[0.3em] text-orange-200 font-bold mb-4 border-b border-white/10 pb-2 uppercase w-full">${item.role}</div>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-white font-serif">${item.p.name}</h3>
+                    <div class="mb-6"><span class="price-tag">GS. ${item.p.price}</span></div>
+                    
+                    <div class="bg-black/40 p-4 w-full rounded mb-4">
+                        <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-widest mb-1">NOTAS</p>
+                        <p class="text-xs text-white italic">${item.p.salida}<br>${item.p.fondo}</p>
                     </div>
-                    <h3 class="text-2xl md:text-4xl font-black mb-6 uppercase text-white leading-none font-serif">
-                        ${item.data.name}
-                    </h3>
-                    <div class="mb-8">
-                        <span class="price-tag">GS. ${item.data.price}</span>
-                    </div>
-                    <div class="mt-auto w-full">
-                        <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-widest mb-2">NOTAS PRINCIPALES</p>
-                        <p class="text-sm text-white font-medium italic">${item.data.salida} & ${item.data.fondo}</p>
-                    </div>
+
+                    <p class="text-[11px] text-zinc-300 leading-relaxed italic border-t border-zinc-700 pt-3 mt-auto">
+                        "Seleccionado por su coincidencia con tu perfil: <span class="text-orange-200">${matchTags.replace(/,/g, ', ')}</span>."
+                    </p>
                 </div>
             `;
+        });
+
+        // 5. Botón WhatsApp
+        document.getElementById('whatsapp-btn-container').innerHTML = `
+            <a href="https://wa.me/${CONFIG.WHATSAPP}?text=${resultTextForCopy}Quiero solicitar este pack." target="_blank" class="action-btn">
+                SOLICITAR MI COLECCIÓN
+            </a>
+        `;
+    }
+
+    function copyResults() {
+        const text = document.getElementById('final-manifesto').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Descripción copiada al portapapeles");
         });
     }
 </script>
