@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOUNI GROUP | DNA Olfativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@100;300;400;600;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --oak-dark: #0f0a07;
+            --royal-beige: #d1b091;
+            --bronze: #a67c52;
+            --white-silk: #f8f4f0;
+        }
+        body { font-family: 'Montserrat', sans-serif; background-color: #000; color: var(--white-silk); overflow-x: hidden; }
+        h1, h2, h3, .luxury-font { font-family: 'Cinzel', serif; }
+
+        /* --- OPTIMIZACIÓN MÓVIL DE FONDO --- */
+        #bg-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; 
+            background-position: center center; /* Centrado perfecto en móvil */
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
+            z-index: -2;
+            filter: brightness(0.35); /* Un poco más oscuro para leer mejor en móvil */
+        }
+        
+        .bg-gradient-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, #000 100%);
+            z-index: -1;
+        }
+
+        .bg-glass { 
+            background: rgba(10, 10, 10, 0.85); /* Más opaco para legibilidad */
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(209, 176, 145, 0.2); 
+            border-radius: 8px;
+        }
+        
+        /* BOTONES OPTIMIZADOS PARA DEDOS (TOUCH TARGETS) */
+        .quiz-option { 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            background: rgba(0,0,0,0.6);
+            transition: 0.3s all ease;
+            font-weight: 700; text-transform: uppercase;
+            padding: 2rem 1.5rem; /* Más padding para tocar fácil */
+            min-height: 100px;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Texto legible */
+            letter-spacing: 1px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        .quiz-option:hover, .quiz-option:active { 
+            background: var(--white-silk); 
+            color: #000; 
+            border-color: var(--bronze); 
+        }
+        
+        .progress-line { height: 4px; background: var(--bronze); position: fixed; top: 0; left: 0; transition: width 0.5s ease; z-index: 100; box-shadow: 0 0 10px var(--bronze); }
+        
+        .price-tag { border: 1px solid var(--bronze); color: var(--bronze); padding: 5px 15px; font-weight: 700; font-size: 14px; display: inline-block; margin-top: 10px;}
+
+        /* CAJA DE MANIFIESTO MEJORADA */
+        .manifesto-box { 
+            border-top: 2px solid var(--bronze); 
+            border-bottom: 2px solid var(--bronze); 
+            padding: 40px 20px; 
+            background: rgba(0,0,0,0.9); 
+            width: 100%; max-width: 800px; margin-bottom: 60px; 
+        }
+        .manifesto-content { 
+            font-size: clamp(1rem, 3vw, 1.3rem); 
+            line-height: 1.8; 
+            text-align: justify; 
+            color: #ddd; 
+        }
+        .manifesto-content b { color: var(--royal-beige); }
+
+        .wa-btn { 
+            background: var(--white-silk); color: #000 !important; 
+            font-weight: 800; letter-spacing: 3px; 
+            transition: 0.3s all; width: 100%; max-width: 400px; 
+            padding: 20px; font-size: 14px; text-align: center; 
+            border-radius: 4px;
+            display: block;
+        }
+        .wa-btn:hover { background: var(--bronze); transform: translateY(-3px); }
+
+        /* Arreglo para grid en móvil */
+        @media (max-width: 768px) {
+            .options-grid-mobile { grid-template-columns: 1fr !important; }
+            .hero-title-mobile { font-size: 4rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="bg-layer"></div>
+<div class="bg-gradient-overlay"></div>
+<div id="progress" class="progress-line" style="width: 0%"></div>
+
+<!-- PANTALLA 1: HOME -->
+<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center p-6">
+    <div class="animate__animated animate__fadeIn max-w-4xl">
+        <h2 class="text-xs md:text-sm uppercase text-zinc-400 mb-6 font-bold tracking-[0.5em]">Asunción • Paraguay</h2>
+        <h1 class="hero-title-mobile text-6xl md:text-9xl font-black mb-6 tracking-tighter uppercase leading-none text-white luxury-font">JOUNI GROUP</h1>
+        <div class="h-[1px] w-24 bg-zinc-700 mx-auto mb-10"></div>
+        <p class="text-zinc-300 font-light text-xl md:text-3xl mb-16 max-w-2xl mx-auto leading-relaxed">
+            El perfume no es solo un aroma.<br>Es la <span class="text-white font-bold underline decoration-orange-400">arquitectura de tu presencia</span>.
+        </p>
+        <button onclick="startQuiz()" class="bg-transparent border border-white hover:bg-white hover:text-black text-white px-10 py-6 text-sm md:text-lg tracking-[0.3em] font-bold transition-all uppercase w-full md:w-auto">
+            Decodificar mi ADN
+        </button>
+    </div>
+</section>
+
+<!-- PANTALLA 2: QUIZ -->
+<section id="quiz" class="hidden min-h-screen flex flex-col items-center justify-center p-6 relative">
+    <div class="max-w-5xl w-full z-10">
+        <header class="text-center mb-16 md:mb-24">
+            <span id="step-indicator" class="text-xs tracking-[0.5em] text-zinc-500 font-bold mb-4 block uppercase">Fase 1 de 6</span>
+            <h2 id="q-title" class="text-3xl md:text-6xl font-medium text-white luxury-font uppercase leading-tight"></h2>
+        </header>
+        
+        <!-- Grid de opciones: En móvil 1 col, en PC 3 cols -->
+        <div id="options-grid" class="options-grid-mobile grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8"></div>
+    </div>
+</section>
+
+<!-- PANTALLA 3: CARGANDO -->
+<section id="loading" class="hidden min-h-screen flex flex-col items-center justify-center bg-black text-center z-50">
+    <div class="w-16 h-16 border-t-2 border-b-2 border-orange-400 rounded-full animate-spin mb-8"></div>
+    <h3 class="text-sm md:text-xl tracking-[0.5em] uppercase text-zinc-400 animate-pulse">Analizando Perfil...</h3>
+</section>
+
+<!-- PANTALLA 4: RESULTADOS -->
+<section id="results" class="hidden min-h-screen py-20 px-4 flex flex-col items-center overflow-y-auto bg-black">
+    <div class="text-center mb-20 w-full max-w-5xl">
+        <h2 class="text-5xl md:text-8xl font-light mb-12 uppercase luxury-font text-white">Tu Selección</h2>
+        
+        <div class="manifesto-box mx-auto shadow-2xl animate__animated animate__fadeInUp">
+            <div id="final-manifesto" class="manifesto-content font-sans"></div>
+        </div>
+        
+        <!-- Botón de WhatsApp Principal -->
+        <div id="whatsapp-btn-container" class="animate__animated animate__pulse animate__infinite animate__slow"></div>
+    </div>
+
+    <!-- Contenedor de las 3 Tarjetas -->
+    <div id="cards-container" class="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full max-w-7xl mb-32"></div>
+
+    <!-- Footer Local -->
+    <div class="w-full max-w-4xl bg-zinc-900/50 p-10 md:p-20 text-center border border-zinc-800">
+        <h3 class="text-2xl md:text-4xl font-light mb-6 uppercase luxury-font text-orange-200">Experiencia Sensorial</h3>
+        <p class="text-zinc-500 mb-10 font-light">Para validar la alquimia con tu piel, visita nuestro showroom privado.</p>
+        <a href="https://maps.app.goo.gl/SPH8X9zguQxPuysq7" target="_blank" class="inline-block text-xs tracking-[0.2em] text-white border-b border-orange-400 pb-1 uppercase">📍 Galería Bonanza, Asunción</a>
+    </div>
+</section>
+
+<script>
+    // CONFIGURACIÓN DE CONTACTO
+    const CONFIG = { WHATSAPP: '595987111111' };
+
+    // --- BASE DE DATOS OPTIMIZADA (6 EJEMPLOS PARA PRUEBA) ---
+    // Tags clave: 
+    // Género: masc, fem, uni
+    // Personalidad: extro (dulce/fiesta), intro (misterioso), lider (autoridad/trabajo), elegante (formal)
+    // Familia Olfativa: dulce, fresco, amaderado, especiado, floral
+    // Categoría: dia, noche, versatil
+    
+    const perfumes = [
+        // 1. EL LIDER/OFICINA (MASC)
+        { 
+            name: "Lattafa Asad", 
+            price: "215.000", 
+            tags: ["masc", "noche", "lider", "amaderado", "especiado", "elegante", "beast"], 
+            salida: "Pimienta Negra, Tabaco", fondo: "Vainilla, Maderas", 
+            cat: "noche" 
+        },
+        // 2. EL ALMA DE LA FIESTA (UNI/DULCE)
+        { 
+            name: "Lattafa Khamrah", 
+            price: "340.000", 
+            tags: ["uni", "noche", "extro", "dulce", "gourmand", "beast", "fiesta"], 
+            salida: "Canela, Nuez Moscada", fondo: "Vainilla, Praliné", 
+            cat: "noche" 
+        },
+        // 3. EL VERSÁTIL/PROFESIONAL (MASC)
+        { 
+            name: "Armaf Club de Nuit Intense", 
+            price: "280.000", 
+            tags: ["masc", "versatil", "lider", "fresco", "citrico", "limpio", "beast"], 
+            salida: "Limón, Piña, Bergamota", fondo: "Almizcle, Abedul", 
+            cat: "versatil" 
+        },
+        // 4. LA ELEGANTE/FLORAL (FEM)
+        { 
+            name: "Lattafa Fakhar Rose", 
+            price: "290.000", 
+            tags: ["fem", "dia", "elegante", "floral", "suave", "limpio", "romantico"], 
+            salida: "Lirio, Frutas", fondo: "Nardo, Jazmín", 
+            cat: "versatil" 
+        },
+        // 5. LA DIVA/SEXY (FEM)
+        { 
+            name: "Lattafa Yara", 
+            price: "220.000", 
+            tags: ["fem", "dia", "extro", "dulce", "gourmand", "juvenil", "fiesta"], 
+            salida: "Orquídea, Heliotropo", fondo: "Vainilla, Frutas Tropicales", 
+            cat: "dia" 
+        },
+        // 6. EL FRESCO/RELAJADO (UNI)
+        { 
+            name: "Lattafa Maahir Legacy", 
+            price: "220.000", 
+            tags: ["masc", "uni", "dia", "intro", "fresco", "citrico", "limpio", "casual"], 
+            salida: "Lima, Menta", fondo: "Ambroxan, Vetiver", 
+            cat: "dia" 
+        }
+    ];
+
+    // --- PREGUNTAS PSICOGRÁFICAS (MEJORADAS) ---
+    const quizData = [
+        { 
+            title: "¿CUÁL ES TU IDENTIDAD?", 
+            key: 'gen', 
+            // Imagen: Abstracto neutro elegante
+            img: "https://images.unsplash.com/photo-1550503023-c9c0b2f6793c?q=80&w=1974&auto=format&fit=crop", 
+            options: [
+                { t: "Caballero", v: "masc" }, 
+                { t: "Dama", v: "fem" }, 
+                { t: "Sin Etiquetas (Unisex)", v: "uni" }
+            ]
+        },
+        { 
+            title: "¿DÓNDE BRILLAS MÁS?", 
+            key: 'env', 
+            // Imagen: Ciudad de noche o Oficina
+            img: "https://images.unsplash.com/photo-1485230905346-71acb9518d9c?q=80&w=2094&auto=format&fit=crop", 
+            options: [
+                { t: "Oficina / Negocios", v: "lider" }, // Prioriza elegante/amaderado
+                { t: "Fiesta / Vida Nocturna", v: "extro" }, // Prioriza dulce/beast
+                { t: "Uso Diario / Relax", v: "intro" } // Prioriza fresco/limpio
+            ]
+        },
+        { 
+            title: "¿TU ROL EN UN GRUPO?", 
+            key: 'role', 
+            // Imagen: Grupo social
+            img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1932&auto=format&fit=crop", 
+            options: [
+                { t: "El Centro de Atención", v: "fiesta" }, // Busca perfumes "Beast Mode"
+                { t: "El Líder Silencioso", v: "elegante" }, // Busca perfumes sofisticados
+                { t: "El Espíritu Libre", v: "casual" } // Busca perfumes versátiles
+            ]
+        },
+        { 
+            title: "¿TU OUTFIT FAVORITO?", 
+            key: 'style', 
+            // Imagen: Moda
+            img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop", 
+            options: [
+                { t: "Traje / Formal / Blazer", v: "amaderado" }, 
+                { t: "Trendy / Llamativo", v: "dulce" }, 
+                { t: "Minimalista / Sport", v: "fresco" }
+            ]
+        },
+        { 
+            title: "¿INTENSIDAD DESEADA?", 
+            key: 'power', 
+            // Imagen: Humo o estela
+            img: "https://images.unsplash.com/photo-1519638831568-d9897f54ed69?q=80&w=2070&auto=format&fit=crop", 
+            options: [
+                { t: "Modo Bestia (Que inunde el lugar)", v: "beast" }, 
+                { t: "Burbuja Personal (Al saludar)", v: "suave" }, 
+                { t: "Equilibrada (Estela notable)", v: "limpio" }
+            ]
+        },
+        { 
+            title: "¿QUÉ TE ATRAE MÁS?", 
+            key: 'note_pref', 
+            // Imagen: Especias
+            img: "https://images.unsplash.com/photo-1596436034336-6c07d3db427e?q=80&w=1974&auto=format&fit=crop", 
+            options: [
+                { t: "Maderas, Cuero y Especias", v: "especiado" }, 
+                { t: "Vainilla, Caramelo y Frutas", v: "gourmand" }, 
+                { t: "Cítricos, Mar y Limpieza", v: "citrico" }
+            ]
+        }
+    ];
+
+    let step = 0;
+    let userAnswers = [];
+
+    // Iniciar con la imagen del home (usa la del primer paso como pre-carga)
+    document.getElementById('bg-layer').style.backgroundImage = `url('https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=1974&auto=format&fit=crop')`;
+
+    function startQuiz() {
+        document.getElementById('home').classList.add('hidden');
+        document.getElementById('quiz').classList.remove('hidden');
+        showStep();
+    }
+
+    function showStep() {
+        const q = quizData[step];
+        
+        // Actualizar UI
+        document.getElementById('step-indicator').innerText = `FASE ${step + 1} DE ${quizData.length}`;
+        document.getElementById('q-title').innerText = q.title;
+        document.getElementById('bg-layer').style.backgroundImage = `url('${q.img}')`;
+        
+        // Barra de progreso
+        const progress = ((step) / quizData.length) * 100;
+        document.getElementById('progress').style.width = `${progress}%`;
+
+        // Generar Opciones
+        const grid = document.getElementById('options-grid'); 
+        grid.innerHTML = '';
+        
+        q.options.forEach(opt => {
+            const btn = document.createElement('div');
+            btn.className = "quiz-option animate__animated animate__fadeInUp";
+            btn.innerText = opt.t;
+            btn.onclick = () => { 
+                userAnswers.push(opt.v); // Guardar tag
+                nextStep(); 
+            };
+            grid.appendChild(btn);
+        });
+    }
+
+    function nextStep() {
+        if (step < quizData.length - 1) {
+            step++;
+            showStep();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById('quiz').classList.add('hidden');
+        document.getElementById('loading').classList.remove('hidden');
+        document.getElementById('progress').style.width = '100%';
+        
+        // Simular cálculo de algoritmo (2 segundos)
+        setTimeout(() => {
+            calculateResults();
+        }, 2000);
+    }
+
+    // --- ALGORITMO DE RECOMENDACIÓN MEJORADO ---
+    function calculateResults() {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('results').classList.remove('hidden');
+        
+        // Imagen de fondo final (oscura y elegante)
+        document.getElementById('bg-layer').style.backgroundImage = `url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop')`;
+
+        // 1. FILTRADO DURO POR GÉNERO (Masc, Fem, Uni)
+        // Si el usuario elige "Uni", le mostramos todo. Si elige Masc, mostramos Masc + Uni.
+        let gender = userAnswers[0];
+        let candidates = perfumes.filter(p => {
+            if (gender === 'uni') return true; 
+            return p.tags.includes(gender) || p.tags.includes('uni');
+        });
+
+        // 2. SISTEMA DE PUNTUACIÓN (SCORING)
+        // Comparamos los tags elegidos (userAnswers) con los tags del perfume
+        candidates = candidates.map(p => {
+            let score = 0;
+            userAnswers.forEach(tag => {
+                if (p.tags.includes(tag)) score += 10; // Coincidencia exacta
+            });
+            return { ...p, score: score };
+        });
+
+        // 3. SELECCIÓN DE CATEGORÍAS (Día, Noche, Versátil)
+        // Ordenamos por puntuación para encontrar los mejores candidatos
+        candidates.sort((a, b) => b.score - a.score);
+
+        // Función para buscar el mejor de una categoría específica que no se repita
+        const getBestInCat = (catName, excludeList = []) => {
+            return candidates.find(p => 
+                (p.cat === catName || p.tags.includes(catName)) && 
+                !excludeList.includes(p.name)
+            ) || candidates[0]; // Fallback al mejor puntuado general
+        };
+
+        const dailyPick = getBestInCat('dia');
+        const nightPick = getBestInCat('noche', [dailyPick.name]);
+        const versatilPick = getBestInCat('versatil', [dailyPick.name, nightPick.name]);
+
+        // 4. GENERAR TEXTO DE MANIFIESTO
+        // Personalizar el texto basado en la respuesta de "Rol" (índice 2) y "Estilo" (índice 3)
+        const personalityMap = {
+            'fiesta': 'AUDACIA MAGNÉTICA',
+            'elegante': 'AUTORIDAD SILENCIOSA',
+            'casual': 'ESPÍRITU LIBRE',
+            'lider': 'LIDERAZGO NATO',
+            'extro': 'PRESENCIA IMPONENTE',
+            'intro': 'ELEGANCIA DISCRETA'
+        };
+        
+        // Buscamos alguna coincidencia en el mapa de personalidad
+        let archetype = "SOFISTICACIÓN PURA"; // Default
+        userAnswers.forEach(ans => {
+            if(personalityMap[ans]) archetype = personalityMap[ans];
+        });
+
+        const manifestoHTML = `
+            Diagnóstico finalizado. Tu perfil olfativo proyecta <b>${archetype}</b>.<br><br>
+            Hemos curado una tríada para tu estilo de vida: 
+            Una firma para el <b>Día</b> que aporta energía, 
+            un arma secreta para la <b>Noche</b> que seduce, 
+            y un comodín <b>Versátil</b> que se adapta a cualquier terreno.
+        `;
+        document.getElementById('final-manifesto').innerHTML = manifestoHTML;
+
+        // 5. BOTÓN DE WHATSAPP CON PEDIDO
+        const waText = `Hola JOUNI GROUP. Hice el test de ADN. Este es mi resultado:%0A` +
+                       `☀️ DÍA: ${dailyPick.name}%0A` +
+                       `🌙 NOCHE: ${nightPick.name}%0A` +
+                       `💎 VERSÁTIL: ${versatilPick.name}`;
+                       
+        document.getElementById('whatsapp-btn-container').innerHTML = `
+            <a href="https://wa.me/${CONFIG.WHATSAPP}?text=${waText}" target="_blank" class="wa-btn mx-auto">
+                SOLICITAR MI COLECCIÓN COMPLETA
+            </a>
+        `;
+
+        // 6. RENDERIZAR TARJETAS
+        const container = document.getElementById('cards-container');
+        container.innerHTML = '';
+        
+        const selection = [
+            { role: "ENERGÍA DIURNA", data: dailyPick },
+            { role: "DOMINIO NOCTURNO", data: nightPick },
+            { role: "FIRMA VERSÁTIL", data: versatilPick }
+        ];
+
+        selection.forEach(item => {
+            container.innerHTML += `
+                <div class="bg-glass p-8 md:p-12 flex flex-col items-center text-center shadow-lg transform transition hover:scale-105 duration-500 animate__animated animate__fadeInUp">
+                    <div class="text-[10px] tracking-[0.4em] text-orange-300 font-bold mb-6 border-b border-white/10 pb-4 uppercase w-full">
+                        ${item.role}
+                    </div>
+                    <h3 class="text-2xl md:text-4xl font-black mb-6 uppercase text-white leading-none font-serif">
+                        ${item.data.name}
+                    </h3>
+                    <div class="mb-8">
+                        <span class="price-tag">GS. ${item.data.price}</span>
+                    </div>
+                    <div class="mt-auto w-full">
+                        <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-widest mb-2">NOTAS PRINCIPALES</p>
+                        <p class="text-sm text-white font-medium italic">${item.data.salida} & ${item.data.fondo}</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
+</script>
+</body>
+</html>
