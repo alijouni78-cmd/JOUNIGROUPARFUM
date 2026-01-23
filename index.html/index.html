@@ -97,7 +97,7 @@
 <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center p-6">
     <div class="animate__animated animate__fadeIn max-w-4xl relative z-10">
         <h2 class="text-[10px] uppercase text-zinc-400 mb-8 font-bold tracking-[0.6em]">Asunción • Paraguay</h2>
-        <h1 class="hero-title-mobile text-6xl md:text-9xl font-black mb-8 tracking-tighter uppercase leading-none text-white luxury-font">PARFUMQUIZ</h1>
+       <h1 class="text-5xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter uppercase leading-none text-white luxury-font">JOUNI GROUP</h1>
         <div class="h-[1px] w-16 bg-zinc-600 mx-auto mb-10"></div>
         <p class="text-zinc-300 font-light text-lg md:text-2xl mb-16 max-w-lg mx-auto leading-relaxed">
             Algoritmo de selección olfativa.<br>Descubre tu firma en 5 pasos.
@@ -618,97 +618,156 @@
         document.getElementById('bg-layer').style.backgroundImage = `url('https://plus.unsplash.com/premium_photo-1699557068775-ae11f9f73149?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`;
     }
 
+   // --- NUEVO ALGORITMO DE PRECISIÓN V3.0 ---
     function calculateResults() {
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
-        document.getElementById('bg-layer').style.backgroundImage = `url('https://plus.unsplash.com/premium_photo-1667597508125-cf9b4e25c197?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`;
+        
+        // Cargar imagen de resultados (asegúrate de que el link esté puesto en tu código anterior o ponlo aquí)
+        // document.getElementById('bg-layer').style.backgroundImage = `url('TU_LINK_IMAGEN_RESULTADOS')`; 
 
-        const selectedGender = userTags[0];
-        // Filtrado Estricto de Género
+        const selectedGender = userTags[0]; // El primer tag es el género
+        
+        // 1. FILTRADO ESTRICTO (MASCULINO SOLO MASCULINO)
+        // Si elige "uni", ve todo. Si elige "masc", ve solo masc. Si "fem", solo fem.
         let candidates = perfumes.filter(p => {
-            if (selectedGender === 'uni') return p.tags.includes('uni') || p.tags.includes('masc') || p.tags.includes('fem'); // Unisex ve todo
-            if (selectedGender === 'masc') return p.tags.includes('masc');
-            if (selectedGender === 'fem') return p.tags.includes('fem');
-            return true;
+            if (selectedGender === 'uni') return true; // Unisex ve todo
+            return p.tags.includes(selectedGender);    // Masc solo ve Masc (y lo que hayas etiquetado masc)
         });
 
-        if(candidates.length === 0) candidates = perfumes; // Fallback
+        // Fallback de seguridad: si el filtro es muy estricto y no queda nada, devolvemos todo.
+        if(candidates.length === 0) candidates = perfumes;
 
-        // Scoring
+        // 2. SISTEMA DE PUNTUACIÓN PONDERADA (Aquí está la magia)
         candidates = candidates.map(p => {
             let score = 0;
-            for(let i = 1; i < userTags.length; i++) {
-                if (p.tags.includes(userTags[i])) score += 10;
-            }
-            score += Math.random() * 2; // Factor aleatorio
+            
+            // A. Puntos por FAMILIA OLFATIVA (Lo más importante) - Vale 30 puntos
+            // Buscamos si el perfume tiene el tag de la pregunta 4 (Maderas, Flores, Oriental)
+            if (p.tags.includes(userTags[3])) score += 30;
+
+            // B. Puntos por NOTA ESPECÍFICA (El toque final) - Vale 25 puntos
+            // Buscamos si tiene el tag de la pregunta 5 (Dulce, Fresco, Especiado)
+            if (p.tags.includes(userTags[4])) score += 25;
+
+            // C. Puntos por AMBIENTE (Día/Noche) - Vale 15 puntos
+            if (p.tags.includes(userTags[2]) || p.cat === userTags[2]) score += 15;
+
+            // D. Puntos por INTENSIDAD - Vale 10 puntos
+            if (p.tags.includes(userTags[1])) score += 10;
+
+            // E. FACTOR CAOS (Rompe los empates)
+            // Añade entre 0 y 5 puntos extra al azar para que no siempre gane el mismo perfume en empate
+            score += Math.random() * 5;
+
             return { ...p, score: score };
         });
 
+        // Ordenamos del puntaje más alto al más bajo
         candidates.sort((a, b) => b.score - a.score);
 
-        const getBest = (catTag, exclude = []) => {
-            return candidates.find(p => 
-                (p.cat === catTag || p.tags.includes(catTag)) && !exclude.includes(p.name)
-            ) || candidates.find(p => !exclude.includes(p.name)) || candidates[0];
+        // 3. SELECCIÓN DE LA TRÍADA (Sin repetir)
+        
+        // Selección 1: El mejor perfume para el ambiente seleccionado (Día/Noche/Versatil)
+        // Buscamos en el TOP 10 de mejores puntuados para variar un poco
+        let topCandidates = candidates.slice(0, 15); // Tomamos los 15 mejores
+        
+        // Función auxiliar para buscar en el top
+        const pickPerfume = (categoryPreference, excludeNames) => {
+            // Intentar encontrar uno que coincida con la categoría (dia/noche) dentro de los mejores puntuados
+            let pick = topCandidates.find(p => 
+                (p.cat === categoryPreference || p.tags.includes(categoryPreference)) && 
+                !excludeNames.includes(p.name)
+            );
+            
+            // Si no hay uno exacto en el top, agarrar cualquiera del top que no esté repetido
+            if (!pick) {
+                pick = topCandidates.find(p => !excludeNames.includes(p.name));
+            }
+            return pick || candidates[0]; // Fallback final
         };
 
-        const pickDay = getBest('dia');
-        const pickNight = getBest('noche', [pickDay?.name]);
-        const pickVersatil = getBest('versatil', [pickDay?.name, pickNight?.name]);
+        const pick1 = pickPerfume(userTags[2], []); 
+        // Para el segundo, intentamos buscar algo complementario. Si salió día, buscamos noche, y viceversa.
+        let secondCategory = (userTags[2] === 'dia') ? 'noche' : 'dia';
+        const pick2 = pickPerfume(secondCategory, [pick1.name]);
+        
+        // El tercero es el comodín versátil
+        const pick3 = pickPerfume('versatil', [pick1.name, pick2.name]);
 
-        // Narrativa
+        // 4. GENERACIÓN DE TEXTO (Más corto y seductor)
         const adjectiveMap = {
-            'beast': 'intensa', 'moderado': 'equilibrada', 'suave': 'discreta',
-            'noche': 'seductora', 'dia': 'dinámica', 'versatil': 'pragmática',
-            'dulce': 'magnética', 'fresco': 'energética', 'especiado': 'sofisticada',
-            'amaderado': 'elegante', 'floral': 'romántica', 'oriental': 'misteriosa'
+            'beast': 'imponente', 'moderado': 'equilibrada', 'suave': 'íntima',
+            'noche': 'magnética', 'dia': 'dinámica', 'versatil': 'adaptable',
+            'dulce': 'adictiva', 'fresco': 'revitalizante', 'especiado': 'misteriosa',
+            'amaderado': 'elegante', 'floral': 'romántica', 'oriental': 'profunda'
         };
         
-        let trait1 = adjectiveMap[userTags[1]] || 'auténtica'; 
-        let trait2 = adjectiveMap[userTags[4]] || 'distinguida';
+        let trait1 = adjectiveMap[userTags[4]] || 'única'; // Nota
+        let trait2 = adjectiveMap[userTags[1]] || 'auténtica'; // Intensidad
 
         const manifestoHTML = `
-            Tu perfil olfativo es <b>${trait1} y ${trait2}</b>.<br><br>
-            Halagamos tu preferencia por aromas que comunican sin gritar. Hemos seleccionado estas tres piezas maestras: una para potenciar tu <b>día</b>, otra para dominar la <b>noche</b> y una firma <b>versátil</b> para cualquier ocasión.
+            Tu firma olfativa es <b>${trait1} y ${trait2}</b>.<br>
+            El algoritmo ha descartado lo convencional para seleccionar tres fragancias que no solo huelen bien, sino que amplifican tu presencia.
         `;
         document.getElementById('final-manifesto').innerHTML = manifestoHTML;
 
-        // Render Cards
+        // 5. RENDERIZADO
         const container = document.getElementById('cards-container');
         container.innerHTML = '';
 
         const selection = [
-            { role: "LUZ DIURNA", p: pickDay, desc: "Perfecto para tu ritmo diario." },
-            { role: "OSCURIDAD NOCTURNA", p: pickNight, desc: "Tu arma de seducción." },
-            { role: "FIRMA VERSÁTIL", p: pickVersatil, desc: "El equilibrio ideal." }
+            { role: "TU FIRMA PRINCIPAL", p: pick1, desc: "La máxima compatibilidad con tus respuestas." },
+            { role: "EL CONTRASTE", p: pick2, desc: "Para esos momentos donde cambia el escenario." },
+            { role: "EL COMODÍN", p: pick3, desc: "Tu as bajo la manga para cualquier situación." }
         ];
 
-        let copyText = `*MI ADN OLFATIVO*%0A${trait1.toUpperCase()} Y ${trait2.toUpperCase()}%0A%0A`;
+        let copyText = `*MI ADN OLFATIVO JOUNI*%0ARESULTADO: ${trait1.toUpperCase()}%0A%0A`;
 
         selection.forEach(item => {
             if(!item.p) return;
             copyText += `*${item.role}:* ${item.p.name}%0A`;
-            let reasons = item.p.tags.filter(t => userTags.includes(t) && t !== selectedGender).slice(0, 2).join(" + ");
             
+            // Notas formateadas
+            let matchTags = item.p.tags.filter(t => [userTags[3], userTags[4]].includes(t)).join(" / ");
+            if (!matchTags) matchTags = "Estilo Único";
+
             container.innerHTML += `
-                <div class="bg-glass p-8 flex flex-col items-center text-center shadow-lg animate__animated animate__fadeInUp">
-                    <div class="text-[9px] tracking-[0.3em] text-zinc-400 font-bold mb-4 border-b border-white/10 pb-2 uppercase w-full">${item.role}</div>
-                    <h3 class="text-xl md:text-2xl font-black mb-2 uppercase text-white font-serif tracking-tight">${item.p.name}</h3>
-                    <div class="mb-4"><span class="price-tag border border-white/30 px-3 py-1 text-xs">GS. ${item.p.price}</span></div>
-                    <div class="w-full mb-4">
-                        <p class="text-[9px] text-zinc-500 uppercase font-bold tracking-widest mb-1">NOTAS</p>
-                        <p class="text-xs text-zinc-300 italic">${item.p.salida} / ${item.p.fondo}</p>
+                <div class="bg-glass p-6 md:p-8 flex flex-col items-center text-center shadow-2xl animate__animated animate__fadeInUp border border-white/10 relative overflow-hidden group">
+                    <!-- Brillo hover -->
+                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    
+                    <div class="text-[9px] tracking-[0.3em] text-zinc-400 font-bold mb-3 border-b border-white/10 pb-2 uppercase w-full">
+                        ${item.role}
                     </div>
-                    <p class="text-[10px] text-zinc-400 leading-relaxed border-t border-white/10 pt-3 mt-auto w-full">
-                        Coincidencia: <span class="text-white">${reasons.toUpperCase()}</span>. ${item.desc}
+                    
+                    <h3 class="text-xl md:text-2xl font-black mb-3 uppercase text-white font-serif tracking-tight leading-tight">
+                        ${item.p.name}
+                    </h3>
+                    
+                    <div class="mb-5">
+                        <span class="price-tag border border-white/20 bg-black/40 px-4 py-1 text-xs text-zinc-200">
+                            GS. ${item.p.price}
+                        </span>
+                    </div>
+                    
+                    <div class="w-full mb-4 bg-black/20 p-3 rounded-sm">
+                        <p class="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-1">NOTAS CLAVE</p>
+                        <p class="text-[11px] text-zinc-300 italic font-light">${item.p.salida}</p>
+                    </div>
+
+                    <p class="text-[10px] text-zinc-400 leading-relaxed border-t border-white/5 pt-3 mt-auto w-full">
+                        <span class="text-white font-bold">Por qué este:</span> Coincide con tu gusto 
+                        <span class="text-zinc-200 uppercase">${matchTags}</span>.
                     </p>
                 </div>
             `;
         });
 
+        // Botón WhatsApp
         document.getElementById('whatsapp-btn-container').innerHTML = `
-            <a href="https://wa.me/${CONFIG.WHATSAPP}?text=${copyText}Quiero consultar disponibilidad." target="_blank" class="action-btn">
-                SOLICITAR DISPONIBILIDAD
+            <a href="https://wa.me/${CONFIG.WHATSAPP}?text=${copyText}Quiero consultar stock." target="_blank" class="action-btn w-full md:w-auto">
+                CONSULTAR DISPONIBILIDAD
             </a>
         `;
     }
